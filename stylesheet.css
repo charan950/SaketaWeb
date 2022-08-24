@@ -1,0 +1,59 @@
+.brand{
+    width: 20rem;
+    vertical-align: middle;
+  
+}
+.profile-pic{
+    width: 5rem;
+    vertical-align: baseline;
+}
+#alpha{
+    display: grid;
+    grid-template-columns: repeat(27, 1fr);
+    gap: 2px;
+    grid-auto-rows: minmax(5px, auto);
+    margin: 20px;
+    
+}
+.grid{
+    background-color: rgb(8, 131, 246);
+    width: 40px;
+    height: 40px;
+    padding: 10px;
+    color: white;
+    text-align: center;
+    
+   
+}
+
+.alpha-pro{
+   width: 1.5rem;
+   height: 1.5rem;
+   align-items: center;
+   
+}
+#empList{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2px;
+    grid-auto-rows: minmax(100px, auto);
+    margin: 20px;
+}
+.list{
+    background-color: rgb(221, 220, 220);
+    /* width: 100px; */
+}
+.profile{
+    width: 100%;
+    height: 6rem;
+}
+.icon{
+    width: 1rem;
+    margin: 3px;
+}
+#form{
+    border: 1px solid;
+    align-items: center;
+    padding: 10px;
+    margin: 50px;
+}

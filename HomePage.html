@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU"crossorigin="anonymous" />
+  <link href="stylesheet.css" rel="stylesheet" type="text/css"/>
+  <script src= "https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ"crossorigin="anonymous"></script>
+<title>Saketa</title>
+
+</head>
+<body>
+<div class="container-fluid">
+    <div class="row mt-4 align-middle border-bottom pb-3">
+        <div class="col-2 me-3 ms-3">
+            <img class="brand" src="brand.png"> 
+        </div>
+        <div class="col pt-3">
+            <div class="display-6 text-info">Employee Directory</div>
+            <div class="fs-5">The Ultimate People Directory Experience</div>
+        </div>
+        <div class="col text-end align-bottom pt-5">
+            <span class="text-info display-5 ">Welcome,</span>
+            <span>Andrew Williams</span>
+            <img class="profile-pic" src="Image8.jfif">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-2 m-5 me-0">
+            <h6>Departments</h6>
+                <div onclick="displayIt()">IT</div>
+                <div onclick="displayHr()">Human Resources</div>
+                <div>MD</div>
+                <div>Sales</div>
+            <h6 class="mt-5">Offices</h6>
+                <div>Seatle</div>
+                <div>India</div>
+            <h6 class="mt-5">Job Titles</h6>
+                <div>SharePoint Practice Head</div>
+                <div>.Net Development Lead</div>
+                <div>Recruiting Expert</div>
+                <div>BI Developer</div>
+                <div>Business Analyst</div>
+                <div class="text-info mt-2" >View More</div>
+        </div>
+        <div class="col">
+            <div id="alpha"></div>
+            <input type="text" id="search" onkeyup="searchBox()">
+            <button type="button">Add Employee</button>
+            <div class="row m-5">
+                <div id="empList" >
+                   <!-- <button type="button" onclick="employees()">sa</button> -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="form">
+        <form>
+            <label for="file-select">Upload:</label>
+            <input type="file" name="upload" id="file-select"><br><br>
+            Firstname:<input type="text" id="fname"><br><br>
+            last Name:<input type="text" id="lname"><br><br>
+            Email: <input type="text" id="email"><br><br>
+            Job: <input type="text" id="job"><br><br>
+            title: <input type="text" id="title"><br><br>
+            Office: <input type="text" id="office"><br><br>
+            department: <input type="text" id="department"><br><br>
+            Phone Number: <input type="text" id="pnum"><br><br>
+            SkypeId :<input type="text" id="skypeid"><br><br>
+        </form>
+        <button type="button"></button>
+    </div>
+</div>
+<script src="HomePageJs.js"></script>
+</body>
+</html>
