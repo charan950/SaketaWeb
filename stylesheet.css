@@ -1,10 +1,14 @@
+/* .container{
+    width: 1200px;
+} */
 .brand{
-    width: 20rem;
+    width: 15rem;
     vertical-align: middle;
   
 }
 .profile-pic{
-    width: 5rem;
+    width: 4rem;
+    height: 4rem;
     vertical-align: baseline;
 }
 #alpha{
@@ -12,18 +16,19 @@
     grid-template-columns: repeat(27, 1fr);
     gap: 2px;
     grid-auto-rows: minmax(5px, auto);
-    margin: 20px;
+    /* margin: 10px; */
     
 }
 .grid{
-    background-color: rgb(8, 131, 246);
-    width: 40px;
-    height: 40px;
+
+    background-color: rgba(0,177,252,255);
+    width: 50px;
+    height: 50px;
     padding: 10px;
     color: white;
-    text-align: center;
-    
-   
+    border: none;
+    font-size: 20px;
+ 
 }
 
 .alpha-pro{
@@ -35,7 +40,7 @@
 #empList{
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 2px;
+    gap: 10px;
     grid-auto-rows: minmax(100px, auto);
     margin: 20px;
 }
@@ -56,4 +61,64 @@
     align-items: center;
     padding: 10px;
     margin: 50px;
+    
+}
+.formpopup{
+    display: none;
+}
+input[type="search"]{
+   
+    height:30px;
+    padding-left:25px;   
+}
+.search{
+    position: relative;
+    }
+
+    .search input{
+
+     height: 40px;
+     width: 15rem;
+     text-indent: 30px;
+     border: 2px solid #d6d4d4;
+
+
+    }
+
+    .search .fa-search{
+
+     position: absolute;
+     top: 25px;
+     left: 95px;
+
+    }
+
+.clear-button{
+    background-color: rgba(105,186,0,255);
+    color:white;
+    padding-left: 10px;
+    border: none;
+    
+}
+.add-button{
+    float: right;
+    background-color: rgba(0,177,252,255);
+    align-items: center;
+    color: white;
+    border:none;
+    font-size: 15px;
+    padding: 10px;
+    font-weight: 500;
+}
+.list-border{
+    border: 1px solid rgb(189, 186, 186);
+    height: 550px;
+}
+select{
+    width:10rem;
+    height: 40px;
+    text-indent: 10px;
+    border: 2px solid #d6d4d4;
+    color:rgb(165, 165, 165);
+   
 }

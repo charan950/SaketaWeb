@@ -6,27 +6,28 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU"crossorigin="anonymous" />
   <link href="stylesheet.css" rel="stylesheet" type="text/css"/>
   <script src= "https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ"crossorigin="anonymous"></script>
-<title>Saketa</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <title>Saketa</title>
 
 </head>
 <body>
 <div class="container-fluid">
-    <div class="row mt-4 align-middle border-bottom pb-3">
-        <div class="col-2 me-3 ms-3">
+    <div class="row m-5 align-middle border-bottom ">
+        <div class="col-1 me-5">
             <img class="brand" src="brand.png"> 
         </div>
-        <div class="col pt-3">
+        <div class="col ps-5 ms-5 ">
             <div class="display-6 text-info">Employee Directory</div>
             <div class="fs-5">The Ultimate People Directory Experience</div>
         </div>
-        <div class="col text-end align-bottom pt-5">
-            <span class="text-info display-5 ">Welcome,</span>
-            <span>Andrew Williams</span>
+        <div class="col text-end align-bottom pt-3 pb-3">
+            <span class="text-info display-6">Welcome,</span>
+            <span class="display-6">Andrew Philips</span>
             <img class="profile-pic" src="Image8.jfif">
         </div>
     </div>
-    <div class="row">
-        <div class="col-2 m-5 me-0">
+    <div class="row m-5">
+        <div class="col-2 ">
             <h6>Departments</h6>
                 <div onclick="displayIt()">IT</div>
                 <div onclick="displayHr()">Human Resources</div>
@@ -43,33 +44,57 @@
                 <div>Business Analyst</div>
                 <div class="text-info mt-2" >View More</div>
         </div>
-        <div class="col">
-            <div id="alpha"></div>
-            <input type="text" id="search" onkeyup="searchBox()">
-            <button type="button">Add Employee</button>
-            <div class="row m-5">
-                <div id="empList" >
-                   <!-- <button type="button" onclick="employees()">sa</button> -->
+        <div class="col ">
+            <div id="alpha">
+                <div class="grid">assssssssss</div>
+            </div>
+            <div class="search mt-2 mb-2" >
+                <label class="fs-5 m-3 ms-0">Search</label>
+                <i class="fa fa-search"></i>
+                <input type="text" id="search" placeholder="Enter Any Keyword" onkeyup="searchBox()">
+                <button type="button" class="clear-button ms-3 p-2 ps-4 pe-4 ">clear</button>
+                <button type="button" class="add-button m-3" onclick="addEmployee()">Add Employee</button>
+                <span class="fs-5 m-3">Filter By</span>
+                <select >
+                    <option>Preferred Name</option>
+                    <option value = "full Name"> full Name </option>
+                    <option value = "Job"> job </option>
+                    <option value = "Departments"> Departments</option>
+                    <option value = "Office"> Office</option>
+                    <option value = "email"> Email </option>
+                    <option value = "title"> Title </option>
+                    <option value = "pnum"> Phone Number</option>
+                    <option value = "skypeid"> SkypeId</option>
+                </select>
+            </div>
+            <div class="col">
+                <small> Note:Please use the advanced filter options to refine your results</small>
+            </div>
+            <div class="row m-2 ">
+                <div class="list-border">
+                    <div id="empList"></div>
+                        <div id="form" class="formpopup ">
+                            <form>
+                                <label for="file-select">Upload:</label>
+                                <input type="file" name="upload" id="file-select" value="s"><br><br>
+                                Firstname:<input type="text" id="fname"><br><br>
+                                last Name:<input type="text" id="lname"><br><br>
+                                Email: <input type="text" id="email"><br><br>
+                                Job: <input type="text" id="job"><br><br>
+                                title: <input type="text" id="title"><br><br>
+                                Office: <input type="text" id="office"><br><br>
+                                department: <input type="text" id="department"><br><br>
+                                Phone Number: <input type="text" id="pnum"><br><br>
+                                SkypeId :<input type="text" id="skypeid"><br><br>
+                                <button type="button" onclick="onSubmit()">Submit</button>
+                            </form>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-    <div id="form">
-        <form>
-            <label for="file-select">Upload:</label>
-            <input type="file" name="upload" id="file-select"><br><br>
-            Firstname:<input type="text" id="fname"><br><br>
-            last Name:<input type="text" id="lname"><br><br>
-            Email: <input type="text" id="email"><br><br>
-            Job: <input type="text" id="job"><br><br>
-            title: <input type="text" id="title"><br><br>
-            Office: <input type="text" id="office"><br><br>
-            department: <input type="text" id="department"><br><br>
-            Phone Number: <input type="text" id="pnum"><br><br>
-            SkypeId :<input type="text" id="skypeid"><br><br>
-        </form>
-        <button type="button"></button>
-    </div>
+    
 </div>
 <script src="HomePageJs.js"></script>
 </body>
