@@ -1,5 +1,6 @@
 var alphastore="";
 
+
 for(var i=65;i<91;i++){
     
     var al=String.fromCharCode(i);
@@ -13,12 +14,28 @@ var alpha=document.getElementById('alpha');
 alpha.innerHTML=alphastore;
 
 function addEmployee(){
-    
-    document.getElementById("form").style.display = "block";
-    document.getElementById("empList").style.display="none";
+   
+    var  fname=document.getElementById('fname').value;
+    var lname=document.getElementById("lname").value;
+    var email=document.getElementById('email').value;
+    var job=document.getElementById('job').value;
+    var title=document.getElementById("title").value;
+    var office=document.getElementById("office").value;
+    var department=document.getElementById("department").value;
+    var pnum=document.getElementById('pnum').value;
+    var skypeid=document.getElementById("skypeid");
+
+    var emp=new employeeDetails("Image1.jfif",fname,lname,email,job,title,office,department,pnum,skypeid);
+    empArray.push(emp);
+    empList();
+    document.getElementById("empList").style.display="";
+    document.getElementById("form").style.display = "none";
      
 }
-
+function openForm() {
+    document.getElementById("form").style.display = "block";
+    document.getElementById("empList").style.display="none";
+  }
 function employeeDetails(img,fname,lname,email,job ,title,office,department,pnum,skypeid){
     this.img=img;
     this.fname=fname;
@@ -59,7 +76,7 @@ function empList(){
         const list = `
         
         <div class="list" >
-        <div onclick='popInfo(${i})'>
+        <div onclick='getDetails(${i})'>
             <div class="row" >
                 <div class="col-4 ">
                     <img class="profile p-2 " src="${empArray[i].img}">
@@ -74,7 +91,7 @@ function empList(){
                 <i><img class="icon" src="heart.png"></i>
                 <i><img class="icon" src="star.png"></i>
             </div>
-        </div>
+            </div>
         </div>
     </div>              
     `;
@@ -84,28 +101,80 @@ function empList(){
     alpha.innerHTML=templist;
     
 }
+function getDetails(v){
+   const le=`
+   <div id="det-form" class="modal">
+        <form class="modal-content animate">
+          <div class="imgcontainer ">
+            <span onclick="closeDetForm()" class="close" title="Close Modal">&times;</span>
+            <img src="${empArray[v].img}" alt="Avatar" class="avatar">
+          </div>
+          <div class="container p-5 text-center">
+          Firstname:${empArray[v].fname}<br>
+          last Name:${empArray[v].lname}<br><br>
+          Email:${empArray[v].email}<br><br>
+          Job:${empArray[v].job}<br><br>
+          title: ${empArray[v].title}<br><br>
+          Office: ${empArray[v].office}<br><br>
+          department:${empArray[v].department}><br><br>
+          Phone Number: ${empArray[v].pnum}<br><br>
+          SkypeId :${empArray[v].skypeid}<br><br>
+            <button type="button" onclick="popInfo(${v})">Update</button>
+          </div>
+        </form>
+      </div>
+   `;
+   const a=document.getElementById("empList");
+   a.innerHTML=le
+   document.getElementById('det-form').style.display='block';
+}
+function closeDetForm(){
+    empList();
+    document.getElementById('det-form').style.display="none";
+   
+}
+function closeSubmitForm(){
+    empList();
+    document.getElementById('updateForm').style.display="none";
+}
 function popInfo(v){
 
     const le=`
-    <form>
-        <label for="file-select">Upload:</label>
-        <input type="file" name="upload" id="file-select" <br><br>
-        Firstname:<input type="text" id="fname" value="${empArray[v].fname}"><br><br>
-        last Name:<input type="text" id="lname" value="${empArray[v].lname}"><br><br>
-        Email: <input type="text" id="email" value="${empArray[v].email}"><br><br>
-        Job: <input type="text" id="job" value="${empArray[v].job}"><br><br>
-        title: <input type="text" id="title"value="${empArray[v].title}"><br><br>
-        Office: <input type="text" id="office"value="${empArray[v].office}"><br><br>
-        department: <input type="text" id="department"value="${empArray[v].department}"><br><br>
-        Phone Number: <input type="text" id="pnum"value="${empArray[v].pnum}"><br><br>
-        SkypeId :<input type="text" id="skypeid"value="${empArray[v].skypeid}"><br><br>
-        <button type="button" onclick="onSubmit(${v})">Submit</button>
+    <div id="updateForm" class="modal">
+    <form class="modal-content animate">
+      <div class="imgcontainer">
+        <span onclick="closeSubmitForm()" class="close" title="Close Modal">&times;</span>
+        <img src="${empArray[v].img}" alt="Avatar" class="avatar">
+      </div>
+      <div class="container p-5 ">
+      <label><b>First Name: </b></label>
+      <input type="text" class="w-100" id="fname" value="${empArray[v].fname}"><br><br>
+      <label><b>Last Name</b></label>
+      <input type="text" class="w-100"id="lname" value="${empArray[v].lname}"><br><br>
+      <label><b>Emaill Address</b></label>
+      <input type="text" class="w-100" id="email" value="${empArray[v].email}"><br><br>
+      <label><b>Job</b></label>
+      <input type="text"class="w-100" id="job" value="${empArray[v].job}"><br><br>
+      <label><b>Title</b></label>
+      <input type="text" class="w-100" id="title"value="${empArray[v].title}"><br><br>
+      <label><b>Office</b></label>
+      <input type="text" class="w-100"  id="office" value="${empArray[v].office}"><br><br>
+      <label><b>Department</b></label>
+      <input type="text" class="w-100" id="department" value="${empArray[v].department}"><br><br>
+      <label><b>Phone Number</b></label>
+      <input type="text" class="w-100" id="pnum" value="${empArray[v].pnum}"><br><br>
+      <label><b>Skype Id</b></label>
+      <input type="text" class="w-100" id="skypeid" value="${empArray[v].skypeid}"><br><br>
+      <button type="button" onclick="onSubmit(${v})">Submit</button>
+    </div>
     </form>
-
+  </div>
+       
+    
     `;
     var alpha=document.getElementById('empList');
     alpha.innerHTML=le;
-   
+    document.getElementById('updateForm').style.display='block';
    
 }
 
@@ -123,7 +192,7 @@ function displayIt(){
             <div onclick='popInfo(${i})'>
                 <div class="row">
                     <div class="col-4 ">
-                        <img class="profile p-2 " src="Image8.jfif">
+                        <img class="profile p-2 " src="${empArray[i].img}">
                     </div>
                 <div class="col p-0">
                     <div>${empArray[i].fname}</div>
@@ -159,7 +228,7 @@ function displayHr(){
             <div onclick='popInfo(${i})'>
                 <div class="row">
                     <div class="col-4 ">
-                        <img class="profile p-2 " src="Image8.jfif">
+                        <img class="profile p-2 " src="${empArray[i].img}">
                     </div>
                 <div class="col p-0">
                     <div>${empArray[i].fname}</div>
@@ -184,11 +253,9 @@ function displayHr(){
 }
 function searchBox(){
     let val=document.getElementById('preferd').value.toLowerCase();
-    // let val=document.getElementById('search').value.toLowerCase();
     renderEmployeesBySearch(val);
 }
-var s=document.getElementsByTagName('option');
-console.log(s[0]);
+
 const renderEmployeesBySearch = (inputStr) => {
    filtearray=["fullname",]
     for(var i=0;i<empArray.length;i++){
@@ -223,6 +290,7 @@ const renderEmployeesBySearch = (inputStr) => {
     alpha.innerHTML=temp;
 }
 function onSubmit(val){
+    var img=empArray[val].img;
     var  fname=document.getElementById('fname').value;
     var lname=document.getElementById("lname").value;
     var email=document.getElementById('email').value;
@@ -233,7 +301,7 @@ function onSubmit(val){
     var phone=document.getElementById('pnum').value;
     var skypeid=document.getElementById("skypeid");
 
-    var emp=new employeeDetails(fname,lname,email,job,title,office,department,pnum,skypeid);
+    var emp=new employeeDetails(img,fname,lname,email,job,title,office,department,pnum,skypeid);
     empArray[val]=emp;
     alert("Employee Details Updated Succesfully");
     document.getElementById("empList").style.display="";
@@ -243,3 +311,48 @@ function onSubmit(val){
    
 }
 window.addEventListener("load",empList);
+function GetDataURL()
+{
+    var imageInput=document.getElementById("form");
+    const reader=new FileReader();
+    var URL=undefined;
+    reader.addEventListener('load',()=>{
+        URL=reader.result;
+        return URL;
+    });
+    reader.readAsDataURL((imageInput.files)[0]);
+    
+}
+
+    // <div class="w-100 text-center det-form bg-info">
+    //     <div class=" imgcontainer">
+    //         <span onclick="document.getElementById('det-form').style.display='none'" class="close" title="Close Modal">&times;</span>
+    //         <img src="${empArray[v].img}" alt="Avatar" class="avatar">
+    //     </div>
+    //     <div >
+    //     Firstname:${empArray[v].fname}<br><br>
+    //      last Name:${empArray[v].lname}<br><br>
+    //      Email:${empArray[v].email}<br><br>
+    //      Job:${empArray[v].job}<br><br>
+    //      title: ${empArray[v].title}<br><br>
+    //      Office: ${empArray[v].office}<br><br>
+    //      department:${empArray[v].department}><br><br>
+    //      Phone Number: ${empArray[v].pnum}<br><br>
+    //      SkypeId :${empArray[v].skypeid}<br><br>
+    // </div>
+    // </div>
+    // `;
+//     <form>
+//     <label for="file-select">Upload:</label>
+//     <input type="file" name="upload" id="file-select" <br><br>
+//     Firstname:<input type="text" id="fname" value="${empArray[v].fname}"><br><br>
+//     last Name:<input type="text" id="lname" value="${empArray[v].lname}"><br><br>
+//     Email: <input type="text" id="email" value="${empArray[v].email}"><br><br>
+//     Job: <input type="text" id="job" value="${empArray[v].job}"><br><br>
+//     title: <input type="text" id="title"value="${empArray[v].title}"><br><br>
+//     Office: <input type="text" id="office"value="${empArray[v].office}"><br><br>
+//     department: <input type="text" id="department"value="${empArray[v].department}"><br><br>
+//     Phone Number: <input type="text" id="pnum"value="${empArray[v].pnum}"><br><br>
+//     SkypeId :<input type="text" id="skypeid"value="${empArray[v].skypeid}"><br><br>
+//     <button type="button" onclick="onSubmit(${v})">Submit</button>
+// </form>
