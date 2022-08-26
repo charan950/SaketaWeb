@@ -1,4 +1,7 @@
-var alphastore="";
+var alphastore=`
+<button class ="grid "><i class="fa fa-user"></i></button>
+`;
+
 
 
 for(var i=65;i<91;i++){
@@ -47,7 +50,12 @@ function employeeDetails(img,fname,lname,email,job ,title,office,department,pnum
     this.department=department;
     this.pnum=pnum;
     this.skypeid=skypeid;
+    // employeeDetails.prototype.fullname = function() {
+    //     return this.fname + " " + this.lname;
+    //   };
+
 }
+
 
 let emp1=new employeeDetails("Image1.jfif","Antony","Morris","antony@gmail.com","SharePoint Practice Head","SharePoint Practice Head","Seattle","IT Department","123456789","antony@skype");
 let emp2=new employeeDetails("Image2.jfif","Helen","Zimmerman","helen@gmail.com","Operations Manager","Operations Manager","India","HR Department",123456789,"helen@skype");
@@ -82,7 +90,7 @@ function empList(){
                     <img class="profile p-2 " src="${empArray[i].img}">
                 </div>
             <div class="col p-0">
-                <div>${empArray[i].fname}</div>
+                <div>${empArray[i].fname} ${empArray[i].lname}</div>
                 <div>${empArray[i].job}</div>
                 <div>${empArray[i].department}</div>
                 <i><img class="icon" src="call-grey.png"></i>
@@ -179,78 +187,8 @@ function popInfo(v){
 }
 
 
-function displayIt(){
-    
-    let ItStore="";
-    let value="IT Department"
-    for(var i=0;i<empArray.length;i++){
-        if(empArray[i].department.includes(value)){
-           
-            const list = `
-        
-            <div class="list">
-            <div onclick='popInfo(${i})'>
-                <div class="row">
-                    <div class="col-4 ">
-                        <img class="profile p-2 " src="${empArray[i].img}">
-                    </div>
-                <div class="col p-0">
-                    <div>${empArray[i].fname}</div>
-                    <div>${empArray[i].job}</div>
-                    <div>${empArray[i].department}</div>
-                    <i><img class="icon" src="call-grey.png"></i>
-                    <i><img class="icon" src="popup.png"></i>
-                    <i><img class="icon" src="message.png"></i>
-                    <i><img class="icon" src="heart.png"></i>
-                    <i><img class="icon" src="star.png"></i>
-                </div>
-            </div>
-            </div>
-        </div>              
-        `;
-        ItStore =ItStore+list;
-        }
-        
-    }
-    var alpha=document.getElementById('empList');
-        alpha.innerHTML=ItStore;
-}
-function displayHr(){
-    let hrstore="";
-    
-    let value="HR Department"
-    for(var i=0;i<empArray.length;i++){
-        if(empArray[i].department.includes(value)){
 
-            const list = `
-        
-            <div class="list">
-            <div onclick='popInfo(${i})'>
-                <div class="row">
-                    <div class="col-4 ">
-                        <img class="profile p-2 " src="${empArray[i].img}">
-                    </div>
-                <div class="col p-0">
-                    <div>${empArray[i].fname}</div>
-                    <div>${empArray[i].job}</div>
-                    <div>${empArray[i].department}</div>
-                    <i><img class="icon" src="call-grey.png"></i>
-                    <i><img class="icon" src="popup.png"></i>
-                    <i><img class="icon" src="message.png"></i>
-                    <i><img class="icon" src="heart.png"></i>
-                    <i><img class="icon" src="star.png"></i>
-                </div>
-            </div>
-            </div>
-        </div>              
-        `;
-        hrstore =hrstore+list;
-        }
-        
-    }
-    var alpha=document.getElementById('empList');
-        alpha.innerHTML=hrstore;
-}
+
 function searchBox(){
     let val=document.getElementById('preferd').value.toLowerCase();
     renderEmployeesBySearch(val);
@@ -258,6 +196,7 @@ function searchBox(){
 
 const renderEmployeesBySearch = (inputStr) => {
    filtearray=["fullname",]
+   var temp="";
     for(var i=0;i<empArray.length;i++){
         if(empArray[i].department.toLowerCase().includes(inputStr)||empArray[i].fname.toLowerCase().includes(inputStr)|| empArray[i].job.toLowerCase().includes(inputStr)){
 
@@ -270,7 +209,7 @@ const renderEmployeesBySearch = (inputStr) => {
                         <img class="profile p-2 " src="Image8.jfif">
                     </div>
                 <div class="col p-0">
-                    <div>${empArray[i].fname}</div>
+                    <div>${empArray[i].fname} ${empArray[i].lname}</div>
                     <div>${empArray[i].job}</div>
                     <div>${empArray[i].department}</div>
                     <i><img class="icon" src="call-grey.png"></i>
@@ -324,35 +263,109 @@ function GetDataURL()
     
 }
 
-    // <div class="w-100 text-center det-form bg-info">
-    //     <div class=" imgcontainer">
-    //         <span onclick="document.getElementById('det-form').style.display='none'" class="close" title="Close Modal">&times;</span>
-    //         <img src="${empArray[v].img}" alt="Avatar" class="avatar">
-    //     </div>
-    //     <div >
-    //     Firstname:${empArray[v].fname}<br><br>
-    //      last Name:${empArray[v].lname}<br><br>
-    //      Email:${empArray[v].email}<br><br>
-    //      Job:${empArray[v].job}<br><br>
-    //      title: ${empArray[v].title}<br><br>
-    //      Office: ${empArray[v].office}<br><br>
-    //      department:${empArray[v].department}><br><br>
-    //      Phone Number: ${empArray[v].pnum}<br><br>
-    //      SkypeId :${empArray[v].skypeid}<br><br>
-    // </div>
-    // </div>
-    // `;
-//     <form>
-//     <label for="file-select">Upload:</label>
-//     <input type="file" name="upload" id="file-select" <br><br>
-//     Firstname:<input type="text" id="fname" value="${empArray[v].fname}"><br><br>
-//     last Name:<input type="text" id="lname" value="${empArray[v].lname}"><br><br>
-//     Email: <input type="text" id="email" value="${empArray[v].email}"><br><br>
-//     Job: <input type="text" id="job" value="${empArray[v].job}"><br><br>
-//     title: <input type="text" id="title"value="${empArray[v].title}"><br><br>
-//     Office: <input type="text" id="office"value="${empArray[v].office}"><br><br>
-//     department: <input type="text" id="department"value="${empArray[v].department}"><br><br>
-//     Phone Number: <input type="text" id="pnum"value="${empArray[v].pnum}"><br><br>
-//     SkypeId :<input type="text" id="skypeid"value="${empArray[v].skypeid}"><br><br>
-//     <button type="button" onclick="onSubmit(${v})">Submit</button>
-// </form>
+function getDepartment(val) {
+    console.log(val);
+  var departmentstrore="";
+    for(var i=0;i<empArray.length;i++){
+        if(empArray[i].department.toLowerCase().includes(val.toLowerCase())){
+
+            const list = `
+        
+            <div class="list">
+            <div onclick='popInfo(${i})'>
+                <div class="row">
+                    <div class="col-4 ">
+                        <img class="profile p-2 " src="${empArray[i].img}">
+                    </div>
+                <div class="col p-0">
+                    <div>${empArray[i].fname} ${empArray[i].lname}</div>
+                    <div>${empArray[i].job}</div>
+                    <div>${empArray[i].department}</div>
+                    <i><img class="icon" src="call-grey.png"></i>
+                    <i><img class="icon" src="popup.png"></i>
+                    <i><img class="icon" src="message.png"></i>
+                    <i><img class="icon" src="heart.png"></i>
+                    <i><img class="icon" src="star.png"></i>
+                </div>
+            </div>
+            </div>
+        </div>              
+        `;
+        departmentstrore =departmentstrore+list;
+        }
+        
+    }
+    var alpha=document.getElementById('empList');
+        alpha.innerHTML=departmentstrore;
+}
+    
+function getOffice(val) {
+   
+  var officestrore="";
+    for(var i=0;i<empArray.length;i++){
+        if(empArray[i].office.toLowerCase().includes(val.toLowerCase())){
+
+            const list = `
+        
+            <div class="list">
+            <div onclick='popInfo(${i})'>
+                <div class="row">
+                    <div class="col-4 ">
+                        <img class="profile p-2 " src="${empArray[i].img}">
+                    </div>
+                <div class="col p-0">
+                    <div>${empArray[i].fname} ${empArray[i].lname}</div>
+                    <div>${empArray[i].job}</div>
+                    <div>${empArray[i].department}</div>
+                    <i><img class="icon" src="call-grey.png"></i>
+                    <i><img class="icon" src="popup.png"></i>
+                    <i><img class="icon" src="message.png"></i>
+                    <i><img class="icon" src="heart.png"></i>
+                    <i><img class="icon" src="star.png"></i>
+                </div>
+            </div>
+            </div>
+        </div>              
+        `;
+        officestrore =officestrore+list;
+        }
+        
+    }
+    var alpha=document.getElementById('empList');
+        alpha.innerHTML=officestrore;
+}
+function getJob(val) {
+   
+    var jobstore="";
+      for(var i=0;i<empArray.length;i++){
+          if(empArray[i].job.toLowerCase().includes(val.toLowerCase())){
+  
+              const list = `
+          
+              <div class="list">
+              <div onclick='popInfo(${i})'>
+                  <div class="row">
+                      <div class="col-4 ">
+                          <img class="profile p-2 " src="${empArray[i].img}">
+                      </div>
+                  <div class="col p-0">
+                      <div>${empArray[i].fname} ${empArray[i].lname}</div>
+                      <div>${empArray[i].job}</div>
+                      <div>${empArray[i].department}</div>
+                      <i><img class="icon" src="call-grey.png"></i>
+                      <i><img class="icon" src="popup.png"></i>
+                      <i><img class="icon" src="message.png"></i>
+                      <i><img class="icon" src="heart.png"></i>
+                      <i><img class="icon" src="star.png"></i>
+                  </div>
+              </div>
+              </div>
+          </div>              
+          `;
+          var jobstore=jobstore+list;
+          }
+          
+      }
+      var alpha=document.getElementById('empList');
+          alpha.innerHTML=jobstore;
+  }

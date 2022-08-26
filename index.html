@@ -11,41 +11,46 @@
 </head>
 <body>
 <div class="container-fluid">
-    <div class="row m-5 align-middle border-bottom ">
-        <div class="col-1 me-5">
-            <img class="brand" src="brand.png"> 
+    <div class=" border-bottom ">
+      <div class="row ms-5">
+        <div class="col-2 p-4 pe-0 ps-0">
+          <img class="brand" src="brand.png">
         </div>
-        <div class="col ps-5 ms-5 ">
-            <div class="display-6 text-info">Employee Directory</div>
-            <div class="fs-5">The Ultimate People Directory Experience</div>
-        </div>
-        <div class="col text-end align-bottom pt-3 pb-3">
-            <span class="text-info display-6">Welcome,</span>
-            <span class="display-6">Andrew Philips</span>
-            <img class="profile-pic" src="Image8.jfif">
-        </div>
+       <div class="col p-4">
+         <span class="display-6 text-info">Employee Directory</span><br>
+         <div class="fs-5">The Ultimate People Directory Experience</div>
+       </div>
+       <div class="col text-end align-bottom pt-5">
+        <span class="text-info display-6">Welcome,</span>
+        <span class="display-6">Andrew Philips</span>
+        <img class="profile-pic" src="Image8.jfif">
+      </div>
+    </div>   
     </div>
+    <!-- <button id="first_button" onclick="getClickID(this.id)">First Button</button> -->
     <div class="row m-5">
         <div class="col-2 ">
             <h6>Departments</h6>
-                <div onclick="displayIt()">IT</div>
-                <div onclick="displayHr()">Human Resources</div>
-                <div>MD</div>
-                <div>Sales</div>
+                <div id="it" onclick="getDepartment(this.id)">IT</div>
+                <div id="hr"onclick="getDepartment(this.id)" >Human Resources</div>
+                <div id="md" onclick="getDepartment(this.id)" >MD</div>
+                <div id="sales">Sales</div>
             <h6 class="mt-5">Offices</h6>
-                <div>Seatle</div>
-                <div>India</div>
+                <div id="seatle" onclick="getOffice(this.id)">Seatle</div>
+                <div id="india"onclick="getOffice(this.id)">India</div>
             <h6 class="mt-5">Job Titles</h6>
-                <div>SharePoint Practice Head</div>
-                <div>.Net Development Lead</div>
-                <div>Recruiting Expert</div>
-                <div>BI Developer</div>
-                <div>Business Analyst</div>
+                <div id="sharepoint" onclick="getJob(this.id)">SharePoint Practice Head</div>
+                <div id="Lead Enginer-Dot Net" onclick="getJob(this.id)">.Net Development Lead</div>
+                <div id="expert"onclick="getJob(this.id)">Recruiting Expert</div>
+                <div id="bi"onclick="getJob(this.id)">BI Developer</div>
+                <div id="ba"onclick="getJob(this.id)">Business Analyst</div>
                 <div class="text-info mt-2" >View More</div>
         </div>
         <div class="col ">
             <div id="alpha">
-                <div class="grid">assssssssss</div>
+                <div class="grid">
+                 
+                </div>
             </div>
             <div class="search mt-2 mb-2" >
                 <label class="fs-5 m-3 ms-0">Search</label>
