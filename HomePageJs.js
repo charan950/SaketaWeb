@@ -378,7 +378,7 @@ function filters(index){
     const list = `
           
     <div class="list">
-    <div onclick='popInfo(${index})'>
+    <div onclick='getDetails(${index})'>
         <div class="row">
             <div class="col-4 ">
                 <img class="profile p-2 " src="${empArray[index].img}">
