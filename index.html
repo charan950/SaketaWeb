@@ -12,19 +12,25 @@
 <body>
 <div class="container-fluid">
     <div class=" border-bottom ">
-      <div class="row ms-5 me-5">
-        <div class="col-1 pe-5 me-5 mt-5">
-          <img class="brand" src="brand.png">
+      <div class="row ms-4 me-4">
+        <div class="d-flex col p-3 pt-5">
+          <div><img class="brand" src="brand.png"></div>
+          <div>
+            <span class="display-6 pe-5 me-5 text-info">Employee Directory</span><br>
+            <div class="fs-5">The Ultimate People Directory Experience</div>
+          </div>
+          <div class="col float-end text-end ms-5 ps-5 align-bottom display-6">
+            <span class="text-info ">Welcome,</span>
+            <span>Andrew Philips</span>
+            <img class="profile-pic" src="Image1.jfif">
+          </div>
         </div>
-       <div class="col pe-0 ps-5 ms-4 mt-3 tex-start text-secondary pt-4">
-         <span class="display-6 text-info">Employee Directory</span><br>
-         <div class="fs-5">The Ultimate People Directory Experience</div>
-       </div>
-       <div class="col text-end align-bottom pt-5 mb-3 display-6">
+        
+       <!-- <div class="col text-end align-bottom display-6">
         <span class="text-info ">Welcome,</span>
         <span>Andrew Philips</span>
         <img class="profile-pic" src="Image1.jfif">
-      </div>
+      </div> -->
     </div>   
     </div>
    
@@ -46,6 +52,8 @@
                 <div id="ba"onclick="getJob(this.id)">Business Analyst(<span id="bacount"></span>)</div>
                 <div id="viewmore"></div>
                 <div class="text-info mt-2" id="more" onclick="viewMore()">View More</div>
+               
+                
         </div>
         <div class="col p-0 ">
             <div id="alpha">
@@ -60,16 +68,12 @@
                 <button type="button" class="clear-button ms-3 p-2 ps-4 pe-4 " onclick="empList()">clear</button>
                 <span class="fs-5 m-3">Filter By</span>
                 <select id="select" onchange="preferred()" class="border-1">
-                    <option>Preferred Name</option>
+                    <option value="preferredname">Preferred Name</option>
                     <option value="fname"> first Name </option>
-                    <option value="lname"> Last Name </option>
                     <option value="job"> job </option>
                     <option value="department"> Departments</option>
                     <option value="office"> Office</option>
                     <option value="email"> Email </option>
-                    <option value="title"> Title </option>
-                    <option value="pnum"> Phone Number</option>
-                    <option value="skypeid"> SkypeId</option>
                 </select>
                 <button onclick="document.getElementById('add-form').style.display='block'" class="add-button">Add Employee</button>
             </div>
@@ -97,19 +101,39 @@
                   <label><b>Last Name</b></label>
                   <input type="text" class="w-100"id="lname" ><br>
                   <label><b>Emaill Address</b></label>
-                  <input type="text" class="w-100" id="email"><br>
-                  <label><b>Job</b></label>
-                  <input type="text"class="w-100" id="job" ><br>
-                  <label><b>Title</b></label>
-                  <input type="text" class="w-100" id="title"><br>
+                  <input type="email" class="w-100 h-auto border" id="email"><br>
+                  <label><b>Job</b></label><br>
+                  <select id="job" class="border-1 w-100 text-black" type="text">
+                    <option>Job Title</option>
+                    <option id="SharePointPracticeHead">SharePoint Practice Head</option>
+                    <option id="NetDevelopmentLead ">Net Development Lead  </option>
+                    <option id="Recruiting Expert"> Recruiting Expert </option>
+                    <option value="BIDeveloper"> BI Developer</option>
+                    <option value="BusinessAnalyst"> Business Analyst</option>
+                    <option value="Operations Manger"> Operations Manger </option>
+                    <option value="SoftwareEngineer"> Software Engineer</option>
+                    <option value="BusinessAnalyst"> Business Analyst</option>
+                    <option value="ProductManager"> Product Manger </option>
+                </select>
               </div>
               <div class="col">
-                  <label><b>Office</b></label>
-                  <input type="text" class="w-100"  id="office"><br>
-                  <label><b>Department</b></label>
-                  <input type="text" class="w-100" id="department"><br>
+                  <label><b>Office</b></label><br>
+                  <select id="selectoffice" class="border-1 w-100 text-black">
+                    <option>Office</option>
+                    <option>Seatle</option>
+                    <option>India</option>
+                  </select>
+                  <label><b>Department</b></label><br>
+                  <select id="selectdep" class="broder-1 w-100 text-black">
+                    <option>IT Department</option>
+                    <option>HR Department</option>
+                    <option>UX Department</option>
+                    <option>Sales Department</option>
+                    <option>MD Department</option>
+                  </select>
+                  
                   <label><b>Phone Number</b></label>
-                  <input type="text" class="w-100" id="pnum"><br>
+                  <input type="tel" id="pnum" name="phone"  pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}" class="w-100 border"><br>
                   <label><b>Skype Id</b></label>
                   <input type="text" class="w-100" id="skypeid"><br><br>
               </div>
