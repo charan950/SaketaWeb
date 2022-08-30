@@ -86,9 +86,9 @@
 .formpopup{
     display: none;
 }
-input[type="search"]{
+input{
    
-    height:30px;
+    height:40px;
     padding-left:25px;   
 }
 .search{
@@ -161,7 +161,21 @@ select{
     border: 1px solid #ccc;
    
   }
+  #viewmore{
+    display: none;
+  }
+  .sidebar{
+    cursor: pointer;
+  }
+  .sidebar div:hover{
+    cursor: pointer;
+    color: #1c8fd1;
+  }
   
+  .hover{
+    cursor: pointer;
+    color: #999999;
+  }
 
   button {
     background-color: #04AA6D;
@@ -196,16 +210,15 @@ select{
   .modal {
    
     display: none;
-    position: fixed; 
     width: 100%; 
-    padding-top: 60px; 
+  
   }
   
 
   .modal-content {
     padding-top: 50px;
     background-color: #fefefe;
-    margin: 5% auto 15% auto; 
+    margin-left:25%; 
     width: 50%; 
   }
   

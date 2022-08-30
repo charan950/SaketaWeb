@@ -25,40 +25,40 @@
             <img class="profile-pic" src="Image1.jfif">
           </div>
         </div>
-        
-       <!-- <div class="col text-end align-bottom display-6">
-        <span class="text-info ">Welcome,</span>
-        <span>Andrew Philips</span>
-        <img class="profile-pic" src="Image1.jfif">
-      </div> -->
     </div>   
     </div>
-   
     <div class="row m-5">
-        <div class="col-2 ">
-            <h6>Departments</h6>
-                <div id="it" onclick="getDepartment(this.id)">IT(<span id="itcount"></span>)</div>
-                <div id="hr"onclick="getDepartment(this.id)" >Human Resources(<span id="hrcount"></span>)</div>
-                <div id="md" onclick="getDepartment(this.id)" >MD(<span id="mdcount"></span>)</div>
-                <div id="sales" onclick="getDepartment(this.id)">Sales(<span id="salescount"></span>)</div>
-            <h6 class="mt-5">Offices</h6>
-                <div id="seatle" onclick="getOffice(this.id)">Seatle(<span id="seatlecount"></span>)</div>
-                <div id="india"onclick="getOffice(this.id)">India(<span id="indiacount"></span>)</div>
-            <h6 class="mt-5">Job Titles</h6>
-                <div id="sharepoint" onclick="getJob(this.id)">SharePoint Practice Head(<span id="sharepointcount"></span>)</div>
-                <div id="Lead Enginer-Dot Net" onclick="getJob(this.id)">.Net Development Lead(<span id="netcount"></span>)</div>
-                <div id="expert"onclick="getJob(this.id)">Recruiting Expert(<span id="recount"></span>)</div>
-                <div id="bi"onclick="getJob(this.id)">BI Developer(<span id="bicount"></span>)</div>
-                <div id="ba"onclick="getJob(this.id)">Business Analyst(<span id="bacount"></span>)</div>
-                <div id="viewmore"></div>
-                <div class="text-info mt-2" id="more" onclick="viewMore()">View More</div>
-               
-                
+        <div class="col-2  sidebar ">
+          <h6>Departments</h6>
+          <div id="it" onclick="getDepartment(this.id)">IT(<span id="itcount"></span>)</div>
+          <div id="hr"onclick="getDepartment(this.id)" >Human Resources(<span id="hrcount"></span>)</div>
+          <div id="md" onclick="getDepartment(this.id)" >MD(<span id="mdcount"></span>)</div>
+          <div id="sales" onclick="getDepartment(this.id)">Sales(<span id="salescount"></span>)</div>
+          <h6 class="mt-5">Offices</h6>
+          <div id="seatle" onclick="getOffice(this.id)">Seatle(<span id="seatlecount"></span>)</div>
+          <div id="india"onclick="getOffice(this.id)">India(<span id="indiacount"></span>)</div>
+          <h6 class="mt-5">Job Titles</h6>
+          <div id="sharepoint" onclick="getJob(this.id)">SharePoint Practice Head(<span id="sharepointcount"></span>)</div>
+          <div id="Lead Enginer-Dot Net" onclick="getJob(this.id)">.Net Development Lead(<span id="netcount"></span>)</div>
+          <div id="expert"onclick="getJob(this.id)">Recruiting Expert(<span id="recount"></span>)</div>
+          <div id="bi"onclick="getJob(this.id)">BI Developer(<span id="bicount"></span>)</div>
+          <div id="ba"onclick="getJob(this.id)">Business Analyst(<span id="bacount"></span>)</div>
+          <div id="viewmore">
+            <div id='Operations Manager' onclick='getJob(this.id)'> Operations Manger(<span id="omcount">${operationsmangercount}</span>)</div>
+            <div id="Product Manager"onclick='getJob(this.id)'>Product Manager(<span id="pmcount">${productmangercount}</span>)</div>
+            <div id='Software Engineer'onclick='getJob(this.id)'>Software Engineer(<span id="secount">${softwareengineercount}</span>)</div>
+            <div id='Network Engineer'onclick='getJob(this.id)'>Network Engineer(<span id="necount">${networkcount}</span>)</div>
+            <div id="Talent Magnet Jr."onclick='getJob(this.id)'>Talent Magnent Jr(<span id="talentcount">${talentcount}</span>)</div>
+            <div id='UI Designer'onclick='getJob(this.id)'>UI Designer(<span id="uicount">${uicount}</span>)</div>
+            <div class="text-info mt-2" id="less" onclick="viewLess()">View Less</div>
+          </div>
+          <div class="text-info mt-2" id="more"onclick=viewMore()  >View More</div>
         </div>
+      
         <div class="col p-0 ">
             <div id="alpha">
                 <div class="grid">
-                 
+                 <!-- Alphabets will render here -->
                 </div>
             </div>
             <div class="search mt-2 mb-2" >
@@ -97,7 +97,7 @@
             <div class="row">
               <div class="col">
                   <label><b>First Name: </b></label>
-                  <input type="text" class="w-100" id="fname"></br>
+                  <input type="text" class="w-100 h-15" id="fname"></br>
                   <label><b>Last Name</b></label>
                   <input type="text" class="w-100"id="lname" ><br>
                   <label><b>Emaill Address</b></label>
@@ -117,14 +117,14 @@
                 </select>
               </div>
               <div class="col">
-                  <label><b>Office</b></label><br>
-                  <select id="selectoffice" class="border-1 w-100 text-black">
+                  <label><b class="m-2">Office</b></label>
+                  <select id="selectoffice" class="border-1 w-100 text-black m-1">
                     <option>Office</option>
                     <option>Seatle</option>
                     <option>India</option>
                   </select>
                   <label><b>Department</b></label><br>
-                  <select id="selectdep" class="broder-1 w-100 text-black">
+                  <select id="selectdep" class="border-1 w-100 text-black">
                     <option>IT Department</option>
                     <option>HR Department</option>
                     <option>UX Department</option>
