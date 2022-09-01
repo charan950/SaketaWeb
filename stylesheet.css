@@ -127,7 +127,6 @@ input{
     color: white;
     border:none;
     font-size: 15px;
-    /* padding: 10px; */
     font-weight: 500;
 }
 .list-border{
@@ -164,13 +163,17 @@ select{
   #viewmore{
     display: none;
   }
-  .sidebar{
+  .sidebar div{
     cursor: pointer;
   }
   .sidebar div:hover{
-    cursor: pointer;
     color: #1c8fd1;
   }
+   
+  /* button:focus {
+    background-color: rgb(10, 10, 19);
+  } */
+  
   
   .hover{
     cursor: pointer;
