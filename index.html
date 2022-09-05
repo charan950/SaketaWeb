@@ -45,7 +45,7 @@
           <div id="Business Analyst"onclick="getJob(this.id)">Business Analyst(<span id="bacount"></span>)</div>
           <span id="viewmore">
             <div id='Operations Manager' onclick='getJob(this.id)'> Operations Manger(<span id="omcount">${operationsmangercount}</span>)</div>
-            <div id="Product Manager"onclick='getJob(this.id)'>Product Manager(<span id="pmcount">${productmangercount}</span>)</div>
+            <div id="Product Manger"onclick='getJob(this.id)'>Product Manager(<span id="pmcount">${productmangercount}</span>)</div>
             <div id='Software Engineer'onclick='getJob(this.id)'>Software Engineer(<span id="secount">${softwareengineercount}</span>)</div>
             <div id='Network Engineer'onclick='getJob(this.id)'>Network Engineer(<span id="necount">${networkcount}</span>)</div>
             <div id="Talent Magnet Jr."onclick='getJob(this.id)'>Talent Magnent Jr(<span id="talentcount">${talentcount}</span>)</div>
@@ -115,16 +115,16 @@
             <div class="row">
               <div class="col">
                   <label><b>First Name: </b></label>
-                  <input type="text" required class="w-100 h-15" id="fname" placeholder="first Name" value=""onkeyup="getPreferredname()"></br>
+                  <input type="text" required class="w-100 h-15" id="fname" placeholder="FIRST NAME" value=""onkeyup="getPreferredname()"></br>
                   <label><b>Last Name</b></label>
-                  <input type="text" class="w-100"id="lname" value=""onkeyup="getPreferredname()"><br>
+                  <input type="text" class="w-100"id="lname" value=""onkeyup="getPreferredname()"placeholder="LAST NAME"><br>
                   <label><b>Preferred Name</b></label>
-                  <input type="text" class="w-100"id="preferredname"value="" ><br>
+                  <input type="text" class="w-100"id="preferredname"value=""placeholder="PREFERRED NAME" ><br>
                   <label><b>Emaill Address</b></label>
-                  <input type="text" class="w-100 h-auto border" id="email"value=""><br>
+                  <input type="text" class="w-100 h-auto border" id="email"value=""placeholder="EMAIL ADDRESS"><br>
                   <label><b>Job</b></label><br>
                   <select id="job" class="border-1 w-100 text-black" type="text">
-                    <option  value=""disabled selected hidden>Job Title</option>
+                    <option  value=""disabled selected hidden>SELECT JOB TITLE</option>
                     <option>SharePoint Practice Head</option>
                     <option>.Net Development Lead  </option>
                     <option> Recruiting Expert </option>
@@ -136,16 +136,16 @@
                     <option> Product Manger </option>
                 </select>
               </div>
-              <div class="col ps-3 ">
-                  <label><b class="ms-2">Office</b></label>
+              <div class="col ps-5 ">
+                  <label><b class="mb-5 ms-2">Office</b></label>
                   <select id="selectoffice" class="border-1 w-100 text-black m-1">
-                    <option  value=""disabled selected hidden>Office</option>
+                    <option  value=""disabled selected hidden>SELECT OFFICE</option>
                     <option>Seatle</option>
                     <option>India</option>
                   </select>
                   <label><b  class="ms-2">Department</b></label><br>
-                  <select id="selectdep" class="border-1 w-100 text-black">
-                    <option  value=""disabled selected hidden>Please Select Department</option>
+                  <select id="selectdep" class="border-1 w-100 text-black m-1">
+                    <option  value=""disabled selected hidden>PLEASE SELECT DEPARTMENT</option>
                     <option>IT Department</option>
                     <option>HR Department</option>
                     <option>UX Department</option>
@@ -153,9 +153,9 @@
                     <option>MD Department</option>
                   </select>
                   <label><b  class="ms-2">Phone Number</b></label>
-                  <input type="text" id="pnum" name="phone"  class="w-100 border"><br>
-                  <label><b>Skype Id</b></label>
-                  <input type="text" class="w-100" id="skypeid"><br><br>
+                  <input type="text" id="pnum" name="phone"  class="w-100 border m-1"placeholder="PHONE NUMBER"><br>
+                  <label><b class="ms-2">Skype Id</b></label>
+                  <input type="text" class="w-100 " id="skypeid"placeholder="SKYPE ID"><br><br>
               </div>
             </div>
             <button type="button" onclick="addEmployee()" >Submit</button>
