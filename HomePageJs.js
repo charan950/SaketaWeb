@@ -1,66 +1,74 @@
-
-var img =new Image();
-img.src='Image1.jfif';
-let employeelistArray=new Array();
-if(localStorage.getItem('emplistkey')){
-  employeelistArray= localStorage.getItem('emplistkey');
+var img = new Image();
+img.src = "Image1.jfif";
+let employeelistArray = new Array();
+if (localStorage.getItem("emplistkey")) {
+  employeelistArray = localStorage.getItem("emplistkey");
   employeelistArray = JSON.parse(employeelistArray);
 }
 
-
 // Function to Add New Employee...............................................................................................
-function addEmployee(){
+function addEmployee() {
   
-  var val = document.getElementById("job");
-  var officeselect = document.getElementById("selectoffice");
-  var selectdep = document.getElementById("selectdep");
+  var jobDropdown = document.getElementById("job");
+  var officedropdown = document.getElementById("selectoffice");
+  var departmentdropdown = document.getElementById("selectdep");
   var fname = document.getElementById("fname").value;
   var lname = document.getElementById("lname").value;
-  var preferredname=document.getElementById('preferredname').value;
+  var preferredname = document.getElementById("preferredname").value;
   var email = document.getElementById("email").value;
-  var job = val.options[val.selectedIndex].value;
-  var office = officeselect.options[officeselect.selectedIndex].value;
-  var department = selectdep.options[selectdep.selectedIndex].value;
-  
-  var pnum = document.getElementById("pnum").value;
+  var job = jobDropdown.options[jobDropdown.selectedIndex].value;
+  var office = officedropdown.options[officedropdown.selectedIndex].value;
+  var department = departmentdropdown.options[departmentdropdown.selectedIndex].value;
+
+  var phonenumber = document.getElementById("pnum").value;
   var skypeid = document.getElementById("skypeid").value;
-  
-  
-  
-  getPreferredname();
-  let employeeobject={'firstname':fname,'lastname':lname,'preferredname':preferredname,'email':email,'job':job,'office':office,'department':department,'phone':pnum,'skypeid':skypeid};
-  if (fname == "" || lname == "" || preferredname==""||email == "" || job == "" || office == "" ||department == "" || skypeid == ""||pnum == "") {
+getPreferredname();
+  let employeeobject = {
+    firstname: fname,
+    lastname: lname,
+    preferredname: preferredname,
+    email: email,
+    job: job,
+    office: office,
+    department: department,
+    phonenumber: phonenumber,
+    skypeid: skypeid,
+  };
+  if (
+    fname == "" ||
+    lname == "" ||
+    preferredname == "" ||
+    email == "" ||
+    job == "" ||
+    office == "" ||
+    department == "" ||
+    skypeid == "" ||
+    phonenumber == ""
+  ) {
     alert("Please Fill all details");
-  } else {
-    employeelistArray.push(employeeobject);
-    
-    localStorage.setItem('emplistkey',JSON.stringify(employeelistArray));
-    document.getElementById('fname').value="";
-    document.getElementById('lname').value="";
-    document.getElementById('preferredname').value="";
-    document.getElementById('email').value="";
-    document.getElementById('job').value="";
-    document.getElementById('selectoffice').value="";
-    document.getElementById('selectdep').value="";
-    document.getElementById('pnum').value="";
-    document.getElementById('skypeid').value="";
+    return;
+  } 
+  employeelistArray.push(employeeobject);
+  localStorage.setItem("emplistkey", JSON.stringify(employeelistArray));
   
-  
-    displayEmployeeList();
-    populateEmployeeCount();
-    alert("Employee Details Added");
-    document.getElementById("empList").style.display = "";
-    document.getElementById("add-form").style.display = "none";
+  var formElements=["fname","lname","preferredname","email"];
+  for(var v in formElements){
+    document.getElementById(formElements[v]).value = "";
   }
+
+  displayEmployeeList();
+  populateEmployeeCount();
+  alert("Employee Details Added");
+  document.getElementById("empList").style.display = "";
+  document.getElementById("add-form").style.display = "none";
 }
 
-
 // function to display employee list...................................................................................
-function displayEmployeeList(){
-  let templist = "";
+function displayEmployeeList() {
+  let listToRender = "";
+  let rawStoredEmployeeList = localStorage.getItem("emplistkey");
+  let storedEmployeeList = JSON.parse(rawStoredEmployeeList);
   for (var i = 0; i < employeelistArray.length; i++) {
-    let value=localStorage.getItem("emplistkey");
-    let parsedvalue=JSON.parse(value);
     const employeelist = `    
     <div class="list">
     <div onclick='getDetails(${i})'>
@@ -69,9 +77,9 @@ function displayEmployeeList(){
               <img class="profile p-2 " src="Image1.jfif">
             </div>
         <div class="col p-0">
-            <div>${parsedvalue[i].firstname} ${parsedvalue[i].lastname}</div>
-            <div>${parsedvalue[i].job}</div>
-            <div>${parsedvalue[i].department}</div>
+            <div>${storedEmployeeList[i].firstname} ${storedEmployeeList[i].lastname}</div>
+            <div>${storedEmployeeList[i].job}</div>
+            <div>${storedEmployeeList[i].department}</div>
             <i><img class="icon" src="call-grey.png"></i>
             <i><img class="icon" src="popup.png"></i>
             <i><img class="icon" src="message.png"></i>
@@ -83,10 +91,10 @@ function displayEmployeeList(){
     </div>              
     `;
 
-    templist = templist + employeelist;
+    listToRender = listToRender + employeelist;
   }
   var alpha = document.getElementById("empList");
-  alpha.innerHTML = templist;
+  alpha.innerHTML = listToRender;
   populateEmployeeCount();
 }
 
@@ -100,21 +108,20 @@ var alphastore = `
 for (let i = 65; i < 91; i++) {
   var al = String.fromCharCode(i);
   const series = `
-        <button class ="grid" onclick="renderEmployeesBySearch('${al.toLowerCase()}')">${al}</button>
+        <button class ="grid" onclick="renderEmployeesBySearch('${al.toLowerCase()}',true)">${al}</button>
     `;
   alphastore += series;
 }
 var alpha = document.getElementById("alpha");
 alpha.innerHTML = alphastore;
-function clearButton(){
+function clearButton() {
   displayEmployeeList();
-  document.getElementById('search').value='';
- 
+  document.getElementById("search").value = "";
 }
 // function to get employe details.............................................................................
 function getDetails(key) {
-  let values=localStorage.getItem('emplistkey');
- let parsedvalue=JSON.parse(values);
+  let rawStoredEmployeeList = localStorage.getItem("emplistkey");
+  let storedEmployeeList = JSON.parse(rawStoredEmployeeList);
   const emplist = `
    <div id="det-form" class="modal">
         <form class="modal-content animate">
@@ -123,16 +130,16 @@ function getDetails(key) {
             <img src="Image1.jfif" alt="Avatar" class="avatar">
           </div>
           <div class="container p-5 text-center">
-            <p><b>Firstname:-</b>${parsedvalue[key].firstname}</p>
-            <p><b> last Name:-</b>${parsedvalue[key].lastname}</p>
-            <p><b> Preferred Name:-</b>${parsedvalue[key].preferredname}</p>
-            <p><b>Email:-</b>${parsedvalue[key].email}</p>
-            <p><b>Job:-${parsedvalue[key].job}</p>
-            <p><b> Office:-</b> ${parsedvalue[key].office}</p>
-            <p><b> department:-</b>${parsedvalue[key].department}</p>
-            <p><b>Phone Number:-</b> ${parsedvalue[key].phone}</p>
-            <p><b>SkypeId :-<b>${parsedvalue[key].skypeid}</p>
-            <button type="button" onclick="popInfo(${key})">Update</button>
+            <p><b>Firstname:-</b>${storedEmployeeList[key].firstname}</p>
+            <p><b> last Name:-</b>${storedEmployeeList[key].lastname}</p>
+            <p><b> Preferred Name:-</b>${storedEmployeeList[key].preferredname}</p>
+            <p><b>Email:-</b>${storedEmployeeList[key].email}</p>
+            <p><b>Job:-</b>${storedEmployeeList[key].job}</p>
+            <p><b> Office:-</b> ${storedEmployeeList[key].office}</p>
+            <p><b> department:-</b>${storedEmployeeList[key].department}</p>
+            <p><b>Phone Number:-</b> ${storedEmployeeList[key].phone}</p>
+            <p><b>SkypeId :-</b>${storedEmployeeList[key].skypeid}</p>
+            <button type="button" onclick="UpdateEmployeelist(${key})">Update</button>
           </div>
         </form>
       </div>
@@ -157,9 +164,9 @@ function closeSubmitForm() {
 }
 
 // function to update employee details..................................................................................................
-function popInfo(key) {
-  let values=localStorage.getItem('emplistkey');
-  let parsedvalue=JSON.parse(values);
+function UpdateEmployeelist(key) {
+  let values = localStorage.getItem("emplistkey");
+  let storedEmployeeList = JSON.parse(values);
   const emplist = `
     <div id="updateForm" class="modal">
     <form class="modal-content animate">
@@ -171,16 +178,16 @@ function popInfo(key) {
         <div class="row">
             <div class="col">
             <label><b>First Name: </b></label>
-            <input type="text" class="w-100" id="fname" value="${parsedvalue[key].firstname}"><br>
+            <input type="text" class="w-100" id="fname" value="${storedEmployeeList[key].firstname}"><br>
             <label><b>Last Name</b></label>
-            <input type="text" class="w-100"id="lname" value="${parsedvalue[key].lastname}"><br>
+            <input type="text" class="w-100"id="lname" value="${storedEmployeeList[key].lastname}"><br>
             <label><b>Preferred Name</b></label>
-            <input type="text" class="w-100"id="preferredname" value="${parsedvalue[key].preferredname}"><br>
+            <input type="text" class="w-100"id="preferredname" value="${storedEmployeeList[key].preferredname}"><br>
             <label><b>Emaill Address</b></label>
-            <input type="text" class="w-100" id="email" value="${parsedvalue[key].email}"><br><br>
+            <input type="text" class="w-100" id="email" value="${storedEmployeeList[key].email}"><br><br>
             <label><b>Job</b></label><br>
                   <select id="jobtitle" class="border-1 w-100 text-black" type="text" >
-                  <option value=""disabled selected hidden>${parsedvalue[key].job}</option>
+                  <option value=""disabled selected hidden>${storedEmployeeList[key].job}</option>
                   <option >SharePoint Practice head</option>
                     <option>.Net Development Lead  </option>
                     <option> Recruiting Expert </option>
@@ -193,15 +200,15 @@ function popInfo(key) {
                 </select>
             </div>
             <div class="col">
-            <label><b>Office</b></label>
-            <select id="office" class="border-1 w-100 text-black" type="text" ><br><br>
-              <option value=""disabled selected hidden>${parsedvalue[key].office}</option>
+            <label><b class=" mb-5 ms-2">Office</b></label>
+            <select id="office" class="border-1 w-100 text-black m-1" type="text" ><br><br>
+              <option value=""disabled selected hidden>${storedEmployeeList[key].office}</option>
               <option >Seatle</option>
               <option>India</option>
             </select>
-            <label><b>Department</b></label>
-            <select id="department" class="border-1 w-100 text-black" type="text" >
-              <option value=""disabled selected hidden>${parsedvalue[key].department}</option>
+            <label><b class="ms-2">Department</b></label>
+            <select id="department" class="border-1 w-100 text-black m-1" type="text" >
+              <option value=""disabled selected hidden>${storedEmployeeList[key].department}</option>
               <option>IT Department</option>
               <option>HR Department</option>
               <option>UX Department</option>
@@ -209,10 +216,10 @@ function popInfo(key) {
               <option>MD Department</option>
             </select>
             
-            <label><b>Phone Number</b></label>
-            <input type="text" class="w-100" id="pnum" value="${parsedvalue[key].phone}"><br><br>
-            <label><b>Skype Id</b></label>
-            <input type="text" class="w-100" id="skypeid" value="${parsedvalue[key].skypeid}"><br><br>
+            <label><b class="ms-2">Phone Number</b></label>
+            <input type="text" class="w-100 border m-1" id="pnum" value="${storedEmployeeList[key].phone}"><br><br>
+            <label><b class="ms-2">Skype Id</b></label>
+            <input type="text" class="w-100" id="skypeid" value="${storedEmployeeList[key].skypeid}"><br><br>
             <button type="button" onclick="onSubmit(${key})">Submit</button>
             </div>
         </div>
@@ -220,7 +227,7 @@ function popInfo(key) {
     </form>
   </div>
     `;
-  
+
   var empListid = document.getElementById("empList");
   empListid.innerHTML = emplist;
   populateEmployeeCount();
@@ -228,32 +235,28 @@ function popInfo(key) {
 }
 
 function searchBox() {
- 
   let val = document.getElementById("search").value.toLowerCase();
-  renderEmployeesBySearch(val);
+  renderEmployeesBySearch(val, false);
 }
-function getPreferredname(){
-  let fname = document.getElementById("fname").value;
-  let lname =document.getElementById('lname').value;
-    document.getElementById("preferredname").value=fname+" "+lname;
+function getPreferredname() {
+  let firstname = document.getElementById("fname").value;
+  let lastname = document.getElementById("lname").value;
+  document.getElementById("preferredname").value = firstname + " " + lastname;
 }
-
-
 
 // function to filter data ..................................................................................................
-const renderEmployeesBySearch = (inputStr) => {
+const renderEmployeesBySearch = (inputStr, bool) => {
   var temp = "";
  
-  var val = preferred();
+var val = preferred();
  console.log(val);
  if (val == "preferredname") {
-  console.log(val);
   for (var i = 0; i < employeelistArray.length; i++) {
     let values=localStorage.getItem('emplistkey');
-    if (
-      JSON.parse(values)[i].preferredname.toLowerCase().includes(inputStr.toLowerCase())
-    ) {
-     
+    if(bool && JSON.parse(values)[i].preferredname.toLowerCase().startsWith(inputStr.toLowerCase())){
+      temp = temp + filters(i);
+    }
+    else if( JSON.parse(values)[i].preferredname.toLowerCase().includes(inputStr.toLowerCase())){
       temp = temp + filters(i);
     }
   }
@@ -261,67 +264,66 @@ const renderEmployeesBySearch = (inputStr) => {
   alpha.innerHTML = temp;
 }
 else if (val == "fname") {
- 
   for (var i = 0; i < employeelistArray.length; i++) {
     let values=localStorage.getItem('emplistkey');
-    if (
-      JSON.parse(values)[i].firstname.toLowerCase().includes(inputStr.toLowerCase())
-    ) {
-     
+    if(bool && JSON.parse(values)[i].firstname.toLowerCase().startsWith(inputStr.toLowerCase())){
+      temp = temp + filters(i);
+    }
+    else if( JSON.parse(values)[i].firstname.toLowerCase().includes(inputStr.toLowerCase())){
       temp = temp + filters(i);
     }
   }
   var alpha = document.getElementById("empList");
   alpha.innerHTML = temp;
-  }
-
+}
+ 
 else if (val == "job") {
   for (var i = 0; i < employeelistArray.length; i++) {
     let values=localStorage.getItem('emplistkey');
-    if (
-      JSON.parse(values)[i].job.toLowerCase().includes(inputStr.toLowerCase())
-    ) {
-     
+    if(bool && JSON.parse(values)[i].job.toLowerCase().startsWith(inputStr.toLowerCase())){
+      temp = temp + filters(i);
+    }
+    else if( JSON.parse(values)[i].job.toLowerCase().includes(inputStr.toLowerCase())){
       temp = temp + filters(i);
     }
   }
   var alpha = document.getElementById("empList");
   alpha.innerHTML = temp;
-  }
+}
 else if (val == "department") {
   for (var i = 0; i < employeelistArray.length; i++) {
     let values=localStorage.getItem('emplistkey');
-    if (
-      JSON.parse(values)[0].department.toLowerCase().includes(inputStr.toLowerCase())
-    ) {
-     
+    if(bool && JSON.parse(values)[i].department.toLowerCase().startsWith(inputStr.toLowerCase())){
+      temp = temp + filters(i);
+    }
+    else if( JSON.parse(values)[i].department.toLowerCase().includes(inputStr.toLowerCase())){
       temp = temp + filters(i);
     }
   }
   var alpha = document.getElementById("empList");
   alpha.innerHTML = temp;
-  }
+}
 else if (val == "email") {
   for (var i = 0; i < employeelistArray.length; i++) {
     let values=localStorage.getItem('emplistkey');
-    if (
-      JSON.parse(values)[0].email.toLowerCase().includes(inputStr.toLowerCase())
-    ) {
-     
+    if(bool && JSON.parse(values)[i].email.toLowerCase().startsWith(inputStr.toLowerCase())){
+      temp = temp + filters(i);
+    }
+    else if( JSON.parse(values)[i].email.toLowerCase().includes(inputStr.toLowerCase())){
       temp = temp + filters(i);
     }
   }
   var alpha = document.getElementById("empList");
   alpha.innerHTML = temp;
-  }
+}
 
 else if (val == "office") {
-  for (var i = 0; i <employeelistArray.length; i++) {
+  for (var i = 0; i < employeelistArray.length; i++) {
     let values=localStorage.getItem('emplistkey');
-    if (
-      JSON.parse(values)[i].office.toLowerCase().includes(inputStr.toLowerCase())
-    ) {
-     
+    if(bool && JSON.parse(values)[i].office.toLowerCase().startsWith(inputStr.toLowerCase())){
+      temp = temp + filters(i);
+    }
+    else if( JSON.parse(values)[i].office.toLowerCase().includes(inputStr.toLowerCase())){
       temp = temp + filters(i);
     }
   }
@@ -330,45 +332,67 @@ else if (val == "office") {
 }
 };
 
+
 // function to add updated details into localStorage ............................................................................
 function onSubmit(key) {
-  
   var val = document.getElementById("jobtitle");
   var officeselect = document.getElementById("office");
   var selectdep = document.getElementById("department");
   var fname = document.getElementById("fname").value;
   var lname = document.getElementById("lname").value;
-  var preferredname=document.getElementById('preferredname').value;
+  var preferredname = document.getElementById("preferredname").value;
   var email = document.getElementById("email").value;
   var job = val.options[val.selectedIndex].text;
- 
+
   var office = officeselect.options[officeselect.selectedIndex].text;
-  
+
   var department = selectdep.options[selectdep.selectedIndex].text;
-  
+
   var phone = document.getElementById("pnum").value;
   var skypeid = document.getElementById("skypeid").value;
- 
-  let employee={'firstname':fname,'lastname':lname,'preferredname':preferredname,'email':email,'job':job,'office':office,'department':department,'phone':phone,'skypeid':skypeid};
-  if (fname == "" || lname == "" || preferredname==""||email == "" || job == "" || office == "" ||department == "" || skypeid == ""||pnum == "") {
+
+  let employee = {
+    firstname: fname,
+    lastname: lname,
+    preferredname: preferredname,
+    email: email,
+    job: job,
+    office: office,
+    department: department,
+    phone: phone,
+    skypeid: skypeid,
+  };
+  if (
+    fname == "" ||
+    lname == "" ||
+    preferredname == "" ||
+    email == "" ||
+    job == "" ||
+    office == "" ||
+    department == "" ||
+    skypeid == "" ||
+    pnum == ""
+  ) {
     alert("Please Fill all details");
   } else {
-  employeelistArray[key]=employee;
-  localStorage.setItem('emplistkey',JSON.stringify(employeelistArray));
-  document.getElementById("fname").value="";
-  alert("Employee Details Updated Succesfully");
-  document.getElementById("empList").style.display = "";
-  document.getElementById("add-form").style.display = "none";
-  displayEmployeeList();
-  populateEmployeeCount();
-}
+    employeelistArray[key] = employee;
+    localStorage.setItem("emplistkey", JSON.stringify(employeelistArray));
+    document.getElementById("fname").value = "";
+    alert("Employee Details Updated Succesfully");
+    document.getElementById("empList").style.display = "";
+    document.getElementById("add-form").style.display = "none";
+    displayEmployeeList();
+    populateEmployeeCount();
+  }
 }
 
-function getDepartment(val) {
+function getDepartment(departmentvalue) {
   var departmentstrore = "";
-  for (var i = 0; i < employeelistArray.length; i++) {
-    let value=localStorage.getItem('emplistkey');
-    if (JSON.parse(value)[i].department.toLowerCase().includes(val.toLowerCase())) {
+  for (let i = 0; i < employeelistArray.length; i++) {
+    let value = localStorage.getItem("emplistkey");
+    if (
+      JSON.parse(value)[i].department.toLowerCase().includes(departmentvalue.toLowerCase())
+    ) {
       departmentstrore = departmentstrore + filters(i);
     }
   }
@@ -376,12 +400,11 @@ function getDepartment(val) {
   alpha.innerHTML = departmentstrore;
 }
 
-function getOffice(val) {
+function getOffice(officevalue) {
   var officestrore = "";
   for (var i = 0; i < employeelistArray.length; i++) {
-    let value=localStorage.getItem('emplistkey');
-    if (JSON.parse(value)[i].office.toLowerCase().includes(val.toLowerCase())) {
-     
+    let value = localStorage.getItem("emplistkey");
+    if (JSON.parse(value)[i].office.toLowerCase().includes(officevalue.toLowerCase())) {
       officestrore = officestrore + filters(i);
     }
   }
@@ -389,105 +412,83 @@ function getOffice(val) {
   alpha.innerHTML = officestrore;
 }
 
-function getJob(val) {
+function getJob(jobvalue) {
   var jobstore = "";
-  for (var i = 0; i <employeelistArray.length; i++) {
-    let value=localStorage.getItem('emplistkey');
-    console.log(JSON.parse(value).job+ " "+ val);
-    if (JSON.parse(value)[i].job.toLowerCase().includes(val.toLowerCase())) {
-     
-      var jobstore = jobstore + filters(i);
+
+  for (var i = 0; i < employeelistArray.length; i++) {
+    let value = localStorage.getItem("emplistkey");
+    if (JSON.parse(value)[i].job.toLowerCase().includes(jobvalue.toLowerCase())) {
+      jobstore = jobstore + filters(i);
     }
   }
+
   var alpha = document.getElementById("empList");
   alpha.innerHTML = jobstore;
 }
 // function to get count for each catergoies...........................................................................
 function populateEmployeeCount() {
-    let itcount = hrcount = mdcount = salescount = seatlecount = indiacount = netcount = sharepointcount = recount = bicount = bacount = networkcount = productmangercount = operationsmangercount = uicount = softwareengineercount = talentcount = 0;
+  let itcount =(hrcount =mdcount =salescount =seatlecount =indiacount =netcount =sharepointcount =recount =bicount =bacount =networkcount =productmangercount =operationsmangercount =uicount =softwareengineercount =talentcount = 0);
   for (var i = 0; i < employeelistArray.length; i++) {
-    let value=localStorage.getItem('emplistkey');
-    let parsevalue=JSON.parse(value);
+    let value = localStorage.getItem("emplistkey");
+    let parsevalue = JSON.parse(value);
+
     if (parsevalue[i].department.startsWith("IT Department")) {
-      itcount++;
+      document.getElementById("itcount").innerHTML = itcount++;
     }
     if (parsevalue[i].department.startsWith("HR")) {
-      hrcount++;
+      document.getElementById("hrcount").innerHTML = hrcount++;
     }
     if (parsevalue[i].department.startsWith("MD")) {
-      mdcount++;
+      document.getElementById("mdcount").innerHTML = mdcount++;
     }
     if (parsevalue[i].department.startsWith("Sales")) {
-      salescount++;
+      document.getElementById("salescount").innerHTML = salescount++;
     }
     if (parsevalue[i].job.startsWith("SharePoint Practice Head")) {
-      sharepointcount++;
-      
+      document.getElementById("sharepointcount").innerHTML = sharepointcount++;
     }
-  
+
     if (parsevalue[i].job.startsWith(".Net Development Lead")) {
-      netcount++;
+      document.getElementById("netcount").innerHTML =netcount++;
     }
     if (parsevalue[i].job.startsWith("Recruiting Expert")) {
-      recount++;
+      document.getElementById("recount").innerHTML =recount++;
     }
     if (parsevalue[i].office.toLowerCase().startsWith("seatle")) {
-      seatlecount++;
+      document.getElementById("seatlecount").innerHTML = seatlecount++;
     }
     if (parsevalue[i].office.startsWith("India")) {
-      indiacount++;
+      document.getElementById("indiacount").innerHTML =indiacount++;
     }
     if (parsevalue[i].job == "Operations Manager") {
-        operationsmangercount++
-      }
-    if (parsevalue[i].job == "Product Manager") {
-        productmangercount++;
-      }
+      document.getElementById("omcount").innerHTML =operationsmangercount++;
+    }
+    if (parsevalue[i].job == "Product Manger") {
+      document.getElementById("pmcount").innerHTML =productmangercount++;
+    }
     if (parsevalue[i].job == "Network Engineer") {
-        networkcount++;
-      }
+      document.getElementById("necount").innerHTML = networkcount++;
+    }
     if (parsevalue[i].job == "UI Designer") {
-        uicount++;
-      }
+      document.getElementById("uicount").innerHTML = uicount++;
+    }
     if (parsevalue[i].job == "Software Engineer") {
-        softwareengineercount++;
-      }
+      document.getElementById("secount").innerHTML=softwareengineercount++;
+    }
     if (parsevalue[i].job == "Talent Magnet Jr.") {
-        talentcount++;
-      }
-    if (parsevalue[i].job == "UX Designer") {
-        uicount++;
-      }
-    if (parsevalue[i].job == 'Business Analyst') {
-        bacount++;
+      document.getElementById("talentcount").innerHTML = talentcount++;
+    }
+    
+    if (parsevalue[i].job == "Business Analyst") {
+      document.getElementById("bacount").innerHTML =bacount++;
     }
   }
-
-  document.getElementById("itcount").innerHTML = itcount;
-  document.getElementById("hrcount").innerHTML = hrcount;
-  document.getElementById("mdcount").innerHTML = mdcount;
-  document.getElementById("salescount").innerHTML = salescount;
-  document.getElementById("sharepointcount").innerHTML = sharepointcount;
-  document.getElementById("netcount").innerHTML = netcount;
-  document.getElementById("recount").innerHTML = recount;
-  document.getElementById("seatlecount").innerHTML = seatlecount;
-  document.getElementById("indiacount").innerHTML = indiacount;
-  document.getElementById("bacount").innerHTML = bacount;
-  document.getElementById("bicount").innerHTML = bicount;
-  document.getElementById('omcount').innerHTML=operationsmangercount;
-  document.getElementById('pmcount').innerHTML=productmangercount;
-  document.getElementById('secount').innerHTML=softwareengineercount;
-  document.getElementById('necount').innerHTML=networkcount;
-  document.getElementById('talentcount').innerHTML=talentcount;
-  document.getElementById('uicount').innerHTML=uicount;
-  
 }
 
 function viewMore() {
-
-    document.getElementById('viewmore').style.display="block ";
-    document.getElementById('less').style.display="";
-    document.getElementById("more").style.display = "none";
+  document.getElementById("viewmore").style.display = "block ";
+  document.getElementById("less").style.display = "";
+  document.getElementById("more").style.display = "none";
 }
 
 function viewLess() {
@@ -496,15 +497,13 @@ function viewLess() {
 }
 
 function preferred() {
- 
   var value = document.getElementById("select");
   var getvalue = value.options[value.selectedIndex].value;
-  
-  return getvalue;
 
+  return getvalue;
 }
 function filters(key) {
-  let value=localStorage.getItem('emplistkey');
+  let value = localStorage.getItem("emplistkey");
   const list = `
           
     <div class="list">
@@ -529,24 +528,35 @@ function filters(key) {
 `;
   return list;
 }
-function closeAddForm(){
-  document.getElementById('add-form').style.display='none';
-  document.getElementById('empList').style.display='';
+function closeAddForm() {
+  document.getElementById("add-form").style.display = "none";
+  document.getElementById("empList").style.display = "";
 }
 populateEmployeeCount();
 
-function filterBy( val,inputStr){
- 
-  for (var i = 1; i <= localStorage.length; i++) {
-    let values=localStorage.getItem(i);
-   JSON.parse(values).val;
-    if (
-      JSON.parse(values).s.toLowerCase().startsWith(inputStr.toLowerCase())
-    ) {
-     
-      temp = temp + filters(i);
+function filterBy(val, inputStr,bool) {
+  let arraycollection=['fname','lname','email','job','department','office','phonenumber','skypeid']
+  let values = localStorage.getItem('emplistkey');
+  let parsedvalue=JSON.parse(values);
+  let emplistkey='';
+  let temp='';
+  for(let i=0;i<arraycollection.length;i++){
+    if(val==arraycollection[i]){
+      emplistkey=arraycollection[i];
     }
+  }
+
+  for (var i = 0; i < employeelistArray.length; i++) {
+    if (bool) {
+      parsedvalue[i].arraycollection[i].toLowerCase().startsWith(inputStr.toLowerCase());
+      temp = temp + filters(i);
+    } else {
+      parsedvalue[i].arraycollection[i].toLowerCase().includes(inputStr.toLowerCase());
+      temp = temp + filters(i);
   }
   var alpha = document.getElementById("empList");
   alpha.innerHTML = temp;
+  }
+ 
 }
+filterBy('fname','fname',true);
