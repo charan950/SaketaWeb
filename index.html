@@ -27,8 +27,8 @@
         </div>
     </div>   
     </div>
-    <div class="row m-5">
-        <div class="col-2  sidebar ">
+    <div class="row mt-5">
+        <div class="col-2 ms-5 sidebar ">
           <h6>Departments</h6>
           <div id="it" onclick="getDepartment(this.id)">IT(<span id="itcount"></span>)</div>
           <div id="hr"onclick="getDepartment(this.id)" >Human Resources(<span id="hrcount"></span>)</div>
@@ -39,10 +39,10 @@
           <div id="india"onclick="getOffice(this.id)">India(<span id="indiacount"></span>)</div>
           <h6 class="mt-5">Job Titles</h6>
           <div id="SharePoint Practice Head" onclick="getJob(this.id)">SharePoint Practice Head(<span id="sharepointcount"></span>)</div>
-          <div id="Lead Enginer-Dot Net" onclick="getJob(this.id)">.Net Development Lead(<span id="netcount"></span>)</div>
-          <div id="expert"onclick="getJob(this.id)">Recruiting Expert(<span id="recount"></span>)</div>
-          <div id="bi"onclick="getJob(this.id)">BI Developer(<span id="bicount"></span>)</div>
-          <div id="ba"onclick="getJob(this.id)">Business Analyst(<span id="bacount"></span>)</div>
+          <div id=".Net Development Lead" onclick="getJob(this.id)">.Net Development Lead(<span id="netcount"></span>)</div>
+          <div id="Recruiting Expert"onclick="getJob(this.id)">Recruiting Expert(<span id="recount"></span>)</div>
+          <div id="BI Developer"onclick="getJob(this.id)">BI Developer(<span id="bicount"></span>)</div>
+          <div id="Business Analyst"onclick="getJob(this.id)">Business Analyst(<span id="bacount"></span>)</div>
           <span id="viewmore">
             <div id='Operations Manager' onclick='getJob(this.id)'> Operations Manger(<span id="omcount">${operationsmangercount}</span>)</div>
             <div id="Product Manager"onclick='getJob(this.id)'>Product Manager(<span id="pmcount">${productmangercount}</span>)</div>
@@ -54,38 +54,53 @@
           </span>
           <div class="text-info mt-2" id="more"onclick=viewMore()  >View More</div>
         </div>
-      
-        <div class="col p-0 ">
-            <div id="alpha">
-                <div class="grid">
-                 <!-- Alphabets will render here -->
+        <div class="col me-5">
+            <div class="row">
+              <div class="col p-0">
+                <div id="alpha">
+                  <div class="grid">
+                   <!-- Alphabets will render here -->
+                  </div>
                 </div>
+              </div>
             </div>
-            <div class="search mt-2 mb-2" >
-                <label class="fs-5 m-3 ms-0">Search</label>
-                <i class="fa fa-search"></i>
-                <input type="text" id="search" placeholder="Enter Any Keyword" onkeyup="searchBox()">
-                <button type="button" class="clear-button ms-3 p-2 ps-4 pe-4 " onclick="displayEmployeeList()">clear</button>
-                <span class="fs-5 m-3">Filter By</span>
-                <select id="select" onchange="preferred()" class="border-1">
-                    <option value="preferredname">Preferred Name</option>
-                    <option value="fname"> first Name </option>
-                    <option value="job"> job </option>
-                    <option value="department"> Departments</option>
-                    <option value="office"> Office</option>
-                    <option value="email"> Email </option>
-                </select>
-                <button onclick="document.getElementById('add-form').style.display='block'" class="add-button">Add Employee</button>
+            <div class="row">
+              <div class="col p-0">
+                <div class="search mt-2 mb-2" >
+                  <label class="fs-5 m-3 ms-0">Search</label>
+                  <i class="fa fa-search"></i>
+                  <input type="text" id="search" placeholder="Enter Any Keyword" onkeyup="searchBox()">
+                  <button type="button" class="clear-button ms-3 p-2 ps-4 pe-4 " onclick="clearButton()">clear</button>
+                  <span class="fs-5 m-3 ms-5 ps-4">Filter By</span>
+                  <select id="select" onchange="preferred()" class="border-1">
+                      
+                      <option value="preferredname" >Preferred Name</option>
+                      <option value="fname"> first Name </option>
+                      <option value="job"> job </option>
+                      <option value="department"> Departments</option>
+                      <option value="office"> Office</option>
+                      <option value="email"> Email </option>
+                  </select>
+                  <button onclick="document.getElementById('add-form').style.display='block'" class="add-button m-0" >Add Employee</button>
+                </div>
+              </div>
             </div>
             <div class="col">
-                <small> Note:Please use the advanced filter options to refine your results</small>
-            </div>
-            <div class="row m-1 ">
-                <div class="list-border overflow-auto">
-                    <div id="empList" >
-                       <!-- Employees List will render here -->
-                    </div>
+              <div class="row">
+                <div class="col p-0 mb-1">
+                  <small > Note:Please use the advanced filter options to refine your results</small>
+                </div>
               </div>
+                
+            </div>
+            <div class="row ">
+              <div class="col p-0 ">
+                <div class="list-border overflow-auto">
+                  <div id="empList" >
+                     <!-- Employees List will render here -->
+                  </div>
+                </div>
+              </div> 
             </div>
         </div>
     </div>
@@ -100,16 +115,16 @@
             <div class="row">
               <div class="col">
                   <label><b>First Name: </b></label>
-                  <input type="text" class="w-100 h-15" id="fname" placeholder="first Name" value=""></br>
+                  <input type="text" required class="w-100 h-15" id="fname" placeholder="first Name" value=""onkeyup="getPreferredname()"></br>
                   <label><b>Last Name</b></label>
                   <input type="text" class="w-100"id="lname" value=""><br>
                   <label><b>Preferred Name</b></label>
-                  <input type="text" class="w-100"id="preferredname"value="" ><br>
+                  <input type="text" class="w-100"id="preferredname"value="" onkeyup="getPreferredname()"><br>
                   <label><b>Emaill Address</b></label>
-                  <input type="email" class="w-100 h-auto border" id="email"value=""><br>
+                  <input type="text" class="w-100 h-auto border" id="email"value=""><br>
                   <label><b>Job</b></label><br>
                   <select id="job" class="border-1 w-100 text-black" type="text">
-                    <option >Job Title</option>
+                    <option  value=""disabled selected hidden>Job Title</option>
                     <option>SharePoint Practice Head</option>
                     <option>.Net Development Lead  </option>
                     <option> Recruiting Expert </option>
@@ -121,14 +136,14 @@
                     <option> Product Manger </option>
                 </select>
               </div>
-              <div class="col">
-                  <label><b class="m-2">Office</b></label>
+              <div class="col ps-3 ">
+                  <label><b class="ms-2">Office</b></label>
                   <select id="selectoffice" class="border-1 w-100 text-black m-1">
-                    <option>Office</option>
+                    <option  value=""disabled selected hidden>Office</option>
                     <option>Seatle</option>
                     <option>India</option>
                   </select>
-                  <label><b>Department</b></label><br>
+                  <label><b  class="ms-2">Department</b></label><br>
                   <select id="selectdep" class="border-1 w-100 text-black">
                     <option>IT Department</option>
                     <option>HR Department</option>
@@ -136,13 +151,13 @@
                     <option>Sales Department</option>
                     <option>MD Department</option>
                   </select>
-                  <label><b>Phone Number</b></label>
-                  <input type="tel" id="pnum" name="phone"  class="w-100 border"><br>
+                  <label><b  class="ms-2">Phone Number</b></label>
+                  <input type="text" id="pnum" name="phone"  class="w-100 border"><br>
                   <label><b>Skype Id</b></label>
                   <input type="text" class="w-100" id="skypeid"><br><br>
               </div>
             </div>
-            <button type="button" onclick="addEmployee()">Submit</button>
+            <button type="button" onclick="addEmployee()" >Submit</button>
           </div>
         </form>
       </div>
