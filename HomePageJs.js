@@ -214,7 +214,7 @@ function UpdateEmployeelist(key) {
                     <option>MD Department</option>
                   </select>
                   <label><b  class="ms-2">Phone Number</b></label>
-                  <input type="text" id="pnum" name="phone"  class="w-100 border m-2"placeholder="PHONE NUMBER" value="${storedEmployeeList[key].phone}"><br>
+                  <input type="text" id="phone" name="phone"  class="w-100 border m-2"placeholder="PHONE NUMBER" value="${storedEmployeeList[key].phonenumber}"><br>
                   <label><b class="ms-2">Skype Id</b></label>
                   <input type="text" class="w-100 m-2" id="skypeid"placeholder="SKYPE ID"value="${storedEmployeeList[key].skypeid}"><br><br>
               </div>
@@ -266,21 +266,21 @@ else if (val == "fname") {
     if(bool && JSON.parse(values)[i].firstname.toLowerCase().startsWith(inputStr.toLowerCase())){
       temp = temp + filters(i);
     }
-    else if( JSON.parse(values)[i].firstname.toLowerCase().includes(inputStr.toLowerCase())){
+    else if(bool==false && JSON.parse(values)[i].firstname.toLowerCase().includes(inputStr.toLowerCase())){
       temp = temp + filters(i);
     }
   }
   var alpha = document.getElementById("empList");
   alpha.innerHTML = temp;
 }
- 
+
 else if (val == "job") {
   for (var i = 0; i < employeelistArray.length; i++) {
     let values=localStorage.getItem('emplistkey');
     if(bool && JSON.parse(values)[i].job.toLowerCase().startsWith(inputStr.toLowerCase())){
       temp = temp + filters(i);
     }
-    else if( JSON.parse(values)[i].job.toLowerCase().includes(inputStr.toLowerCase())){
+    else if(bool==false && JSON.parse(values)[i].job.toLowerCase().includes(inputStr.toLowerCase())){
       temp = temp + filters(i);
     }
   }
@@ -293,7 +293,7 @@ else if (val == "department") {
     if(bool && JSON.parse(values)[i].department.toLowerCase().startsWith(inputStr.toLowerCase())){
       temp = temp + filters(i);
     }
-    else if( JSON.parse(values)[i].department.toLowerCase().includes(inputStr.toLowerCase())){
+    else if(bool==false && JSON.parse(values)[i].department.toLowerCase().includes(inputStr.toLowerCase())){
       temp = temp + filters(i);
     }
   }
@@ -306,7 +306,7 @@ else if (val == "email") {
     if(bool && JSON.parse(values)[i].email.toLowerCase().startsWith(inputStr.toLowerCase())){
       temp = temp + filters(i);
     }
-    else if( JSON.parse(values)[i].email.toLowerCase().includes(inputStr.toLowerCase())){
+    else if(bool==false && JSON.parse(values)[i].email.toLowerCase().includes(inputStr.toLowerCase())){
       temp = temp + filters(i);
     }
   }
@@ -320,7 +320,7 @@ else if (val == "office") {
     if(bool && JSON.parse(values)[i].office.toLowerCase().startsWith(inputStr.toLowerCase())){
       temp = temp + filters(i);
     }
-    else if( JSON.parse(values)[i].office.toLowerCase().includes(inputStr.toLowerCase())){
+    else if(bool==false && JSON.parse(values)[i].office.toLowerCase().includes(inputStr.toLowerCase())){
       temp = temp + filters(i);
     }
   }
@@ -345,7 +345,7 @@ function onSubmit(key) {
 
   var department = selectdep.options[selectdep.selectedIndex].text;
 
-  var phone = document.getElementById("pnum").value;
+  var phone = document.getElementById("phone").value;
   var skypeid = document.getElementById("skypeid").value;
 
   let employee = {
@@ -356,7 +356,7 @@ function onSubmit(key) {
     job: job,
     office: office,
     department: department,
-    phone: phone,
+    phonenumber: phone,
     skypeid: skypeid,
   };
   if (
@@ -424,7 +424,7 @@ function getJob(jobvalue) {
 }
 // function to get count for each catergoies...........................................................................
 function populateEmployeeCount() {
-  let itcount =hrcount =mdcount =salescount =seatlecount =indiacount =netcount =sharepointcount =recount =bicount =bacount =networkcount =productmangercount =operationsmangercount =uicount =softwareengineercount =talentcount = 0;
+  let itcount =hrcount =mdcount =salescount =seatlecount =indiacount =netcount =sharepointcount =recount =bicount =bacount  =productmangercount =operationsmangercount  =softwareengineercount =0;
   for (var i = 0; i < employeelistArray.length; i++) {
     let value = localStorage.getItem("emplistkey");
     let parsevalue = JSON.parse(value);
@@ -458,24 +458,17 @@ function populateEmployeeCount() {
     if (parsevalue[i].office.startsWith("India")) {
      indiacount++;
     }
-    if (parsevalue[i].job == "Operations Manager") {
+    if (parsevalue[i].job == "Operations Manger") {
      operationsmangercount++;
     }
     if (parsevalue[i].job == "Product Manger") {
       productmangercount++;
     }
-    if (parsevalue[i].job == "Network Engineer") {
-       networkcount++;
-    }
-    if (parsevalue[i].job == "UI Designer") {
-      uicount++;
-    }
+    
     if (parsevalue[i].job == "Software Engineer") {
       softwareengineercount++;
     }
-    if (parsevalue[i].job == "Talent Magnet Jr.") {
-     talentcount++;
-    }
+  
     
     if (parsevalue[i].job == "Business Analyst") {
     bacount++;
@@ -494,9 +487,6 @@ function populateEmployeeCount() {
   document.getElementById("sharepointcount").innerHTML = sharepointcount;
   document.getElementById("recount").innerHTML =recount;
   document.getElementById("bacount").innerHTML =bacount;
-  document.getElementById("talentcount").innerHTML = talentcount;
-  document.getElementById("uicount").innerHTML = uicount;
-  document.getElementById("necount").innerHTML = networkcount;
   document.getElementById("pmcount").innerHTML =productmangercount;
   document.getElementById("omcount").innerHTML =operationsmangercount;
   document.getElementById("indiacount").innerHTML =indiacount;
