@@ -19,10 +19,9 @@ function addEmployee() {
   var job = jobDropdown.options[jobDropdown.selectedIndex].value;
   var office = officedropdown.options[officedropdown.selectedIndex].value;
   var department = departmentdropdown.options[departmentdropdown.selectedIndex].value;
-
   var phonenumber = document.getElementById("pnum").value;
   var skypeid = document.getElementById("skypeid").value;
-getPreferredname();
+  getPreferredname();
   let employeeobject = {
     firstname: fname,
     lastname: lname,
@@ -51,7 +50,7 @@ getPreferredname();
   employeelistArray.push(employeeobject);
   localStorage.setItem("emplistkey", JSON.stringify(employeelistArray));
   
-  var formElements=["fname","lname","preferredname","email"];
+  var formElements=["fname","lname","preferredname","email","job","selectoffice","selectdep","skypeid","pnum"];
   for(var v in formElements){
     document.getElementById(formElements[v]).value = "";
   }
@@ -137,7 +136,7 @@ function getDetails(key) {
             <p><b>Job:-</b>${storedEmployeeList[key].job}</p>
             <p><b> Office:-</b> ${storedEmployeeList[key].office}</p>
             <p><b> department:-</b>${storedEmployeeList[key].department}</p>
-            <p><b>Phone Number:-</b> ${storedEmployeeList[key].phone}</p>
+            <p><b>Phone Number:-</b> ${storedEmployeeList[key].phonenumber}</p>
             <p><b>SkypeId :-</b>${storedEmployeeList[key].skypeid}</p>
             <button type="button" onclick="UpdateEmployeelist(${key})">Update</button>
           </div>
@@ -199,28 +198,28 @@ function UpdateEmployeelist(key) {
                     <option> Product Manger </option>
                 </select>
             </div>
-            <div class="col">
-            <label><b class=" mb-5 ms-2">Office</b></label>
-            <select id="office" class="border-1 w-100 text-black m-1" type="text" ><br><br>
-              <option value=""disabled selected hidden>${storedEmployeeList[key].office}</option>
-              <option >Seatle</option>
-              <option>India</option>
-            </select>
-            <label><b class="ms-2">Department</b></label>
-            <select id="department" class="border-1 w-100 text-black m-1" type="text" >
-              <option value=""disabled selected hidden>${storedEmployeeList[key].department}</option>
-              <option>IT Department</option>
-              <option>HR Department</option>
-              <option>UX Department</option>
-              <option>Sales Department</option>
-              <option>MD Department</option>
-            </select>
-            
-            <label><b class="ms-2">Phone Number</b></label>
-            <input type="text" class="w-100 border m-1" id="pnum" value="${storedEmployeeList[key].phone}"><br><br>
-            <label><b class="ms-2">Skype Id</b></label>
-            <input type="text" class="w-100" id="skypeid" value="${storedEmployeeList[key].skypeid}"><br><br>
-            <button type="button" onclick="onSubmit(${key})">Submit</button>
+            <div class="col ps-5 ">
+                  <label><b class="mb-5 ms-2">Office</b></label>
+                  <select id="office" class="border-1 w-100 text-black m-2">
+                    <option  value=""disabled selected hidden >${storedEmployeeList[key].office}</option>
+                    <option>Seatle</option>
+                    <option>India</option>
+                  </select>
+                  <label><b  class="ms-2">Department</b></label><br>
+                  <select id="department" class="border-1 w-100 text-black m-2">
+                    <option  value=""disabled selected hidden>${storedEmployeeList[key].department}</option>
+                    <option>IT Department</option>
+                    <option>HR Department</option>
+                    <option>Sales Department</option>
+                    <option>MD Department</option>
+                  </select>
+                  <label><b  class="ms-2">Phone Number</b></label>
+                  <input type="text" id="pnum" name="phone"  class="w-100 border m-2"placeholder="PHONE NUMBER" value="${storedEmployeeList[key].phone}"><br>
+                  <label><b class="ms-2">Skype Id</b></label>
+                  <input type="text" class="w-100 m-2" id="skypeid"placeholder="SKYPE ID"value="${storedEmployeeList[key].skypeid}"><br><br>
+              </div>
+              </div>
+              <button type="button" onclick="onSubmit(${key})">Submit</button>
             </div>
         </div>
     </div>
@@ -246,17 +245,15 @@ function getPreferredname() {
 
 // function to filter data ..................................................................................................
 const renderEmployeesBySearch = (inputStr, bool) => {
-  var temp = "";
- 
+var temp = "";
 var val = preferred();
- console.log(val);
  if (val == "preferredname") {
   for (var i = 0; i < employeelistArray.length; i++) {
     let values=localStorage.getItem('emplistkey');
     if(bool && JSON.parse(values)[i].preferredname.toLowerCase().startsWith(inputStr.toLowerCase())){
       temp = temp + filters(i);
     }
-    else if( JSON.parse(values)[i].preferredname.toLowerCase().includes(inputStr.toLowerCase())){
+    else if(bool==false && JSON.parse(values)[i].preferredname.toLowerCase().includes(inputStr.toLowerCase())){
       temp = temp + filters(i);
     }
   }
@@ -427,63 +424,86 @@ function getJob(jobvalue) {
 }
 // function to get count for each catergoies...........................................................................
 function populateEmployeeCount() {
-  let itcount =(hrcount =mdcount =salescount =seatlecount =indiacount =netcount =sharepointcount =recount =bicount =bacount =networkcount =productmangercount =operationsmangercount =uicount =softwareengineercount =talentcount = 0);
+  let itcount =hrcount =mdcount =salescount =seatlecount =indiacount =netcount =sharepointcount =recount =bicount =bacount =networkcount =productmangercount =operationsmangercount =uicount =softwareengineercount =talentcount = 0;
   for (var i = 0; i < employeelistArray.length; i++) {
     let value = localStorage.getItem("emplistkey");
     let parsevalue = JSON.parse(value);
 
     if (parsevalue[i].department.startsWith("IT Department")) {
-      document.getElementById("itcount").innerHTML = itcount++;
+       itcount++;
     }
     if (parsevalue[i].department.startsWith("HR")) {
-      document.getElementById("hrcount").innerHTML = hrcount++;
+       hrcount++;
     }
     if (parsevalue[i].department.startsWith("MD")) {
-      document.getElementById("mdcount").innerHTML = mdcount++;
+      mdcount++
     }
     if (parsevalue[i].department.startsWith("Sales")) {
-      document.getElementById("salescount").innerHTML = salescount++;
+      salescount++;
+      
     }
     if (parsevalue[i].job.startsWith("SharePoint Practice Head")) {
-      document.getElementById("sharepointcount").innerHTML = sharepointcount++;
+      sharepointcount++;
     }
 
     if (parsevalue[i].job.startsWith(".Net Development Lead")) {
-      document.getElementById("netcount").innerHTML =netcount++;
+      netcount++;
     }
     if (parsevalue[i].job.startsWith("Recruiting Expert")) {
-      document.getElementById("recount").innerHTML =recount++;
+      recount++;
     }
     if (parsevalue[i].office.toLowerCase().startsWith("seatle")) {
-      document.getElementById("seatlecount").innerHTML = seatlecount++;
+      seatlecount++;
     }
     if (parsevalue[i].office.startsWith("India")) {
-      document.getElementById("indiacount").innerHTML =indiacount++;
+     indiacount++;
     }
     if (parsevalue[i].job == "Operations Manager") {
-      document.getElementById("omcount").innerHTML =operationsmangercount++;
+     operationsmangercount++;
     }
     if (parsevalue[i].job == "Product Manger") {
-      document.getElementById("pmcount").innerHTML =productmangercount++;
+      productmangercount++;
     }
     if (parsevalue[i].job == "Network Engineer") {
-      document.getElementById("necount").innerHTML = networkcount++;
+       networkcount++;
     }
     if (parsevalue[i].job == "UI Designer") {
-      document.getElementById("uicount").innerHTML = uicount++;
+      uicount++;
     }
     if (parsevalue[i].job == "Software Engineer") {
-      document.getElementById("secount").innerHTML=softwareengineercount++;
+      softwareengineercount++;
     }
     if (parsevalue[i].job == "Talent Magnet Jr.") {
-      document.getElementById("talentcount").innerHTML = talentcount++;
+     talentcount++;
     }
     
     if (parsevalue[i].job == "Business Analyst") {
-      document.getElementById("bacount").innerHTML =bacount++;
+    bacount++;
+    }
+    if (parsevalue[i].job == "BI Developer") {
+      bicount++;
     }
   }
+  document.getElementById("itcount").innerHTML = itcount;
+  document.getElementById("hrcount").innerHTML = hrcount;
+  document.getElementById("mdcount").innerHTML = mdcount;
+  document.getElementById("netcount").innerHTML = netcount;
+  document.getElementById("salescount").innerHTML = salescount;
+  document.getElementById('seatlecount').innerHTML=seatlecount;
+  document.getElementById('bicount').innerHTML=seatlecount;
+  document.getElementById("sharepointcount").innerHTML = sharepointcount;
+  document.getElementById("recount").innerHTML =recount;
+  document.getElementById("bacount").innerHTML =bacount;
+  document.getElementById("talentcount").innerHTML = talentcount;
+  document.getElementById("uicount").innerHTML = uicount;
+  document.getElementById("necount").innerHTML = networkcount;
+  document.getElementById("pmcount").innerHTML =productmangercount;
+  document.getElementById("omcount").innerHTML =operationsmangercount;
+  document.getElementById("indiacount").innerHTML =indiacount;
+  document.getElementById('secount').innerHTML=softwareengineercount;
+  document.getElementById('bicount').innerHTML=bicount;
 }
+
 
 function viewMore() {
   document.getElementById("viewmore").style.display = "block ";
@@ -534,29 +554,29 @@ function closeAddForm() {
 }
 populateEmployeeCount();
 
-function filterBy(val, inputStr,bool) {
-  let arraycollection=['fname','lname','email','job','department','office','phonenumber','skypeid']
-  let values = localStorage.getItem('emplistkey');
-  let parsedvalue=JSON.parse(values);
-  let emplistkey='';
-  let temp='';
-  for(let i=0;i<arraycollection.length;i++){
-    if(val==arraycollection[i]){
-      emplistkey=arraycollection[i];
-    }
-  }
+// function filterBy(val, inputStr,bool) {
+//   let arraycollection=['fname','lname','email','job','department','office','phonenumber','skypeid']
+//   let values = localStorage.getItem('emplistkey');
+//   let parsedvalue=JSON.parse(values);
+//   let emplistkey='';
+//   let temp='';
+//   for(let i=0;i<arraycollection.length;i++){
+//     if(val==arraycollection[i]){
+//       emplistkey=arraycollection[i];
+//     }
+//   }
 
-  for (var i = 0; i < employeelistArray.length; i++) {
-    if (bool) {
-      parsedvalue[i].arraycollection[i].toLowerCase().startsWith(inputStr.toLowerCase());
-      temp = temp + filters(i);
-    } else {
-      parsedvalue[i].arraycollection[i].toLowerCase().includes(inputStr.toLowerCase());
-      temp = temp + filters(i);
-  }
-  var alpha = document.getElementById("empList");
-  alpha.innerHTML = temp;
-  }
+//   for (var i = 0; i < employeelistArray.length; i++) {
+//     if (bool) {
+//       parsedvalue[i].arraycollection[i].toLowerCase().startsWith(inputStr.toLowerCase());
+//       temp = temp + filters(i);
+//     } else {
+//       parsedvalue[i].arraycollection[i].toLowerCase().includes(inputStr.toLowerCase());
+//       temp = temp + filters(i);
+//   }
+//   var alpha = document.getElementById("empList");
+//   alpha.innerHTML = temp;
+//   }
  
-}
-filterBy('fname','fname',true);
+// }
+// filterBy('fname','fname',true);
