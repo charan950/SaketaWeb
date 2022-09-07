@@ -50,7 +50,7 @@ function addEmployee() {
   employeelistArray.push(employeeobject);
   localStorage.setItem("emplistkey", JSON.stringify(employeelistArray));
   
-  var formElements=["fname","lname","preferredname","email"];
+  var formElements=["fname","lname","preferredname","email","job","selectoffice","selectdep","skypeid","pnum"];
   for(var v in formElements){
     document.getElementById(formElements[v]).value = "";
   }
