@@ -171,10 +171,11 @@ select{
   #viewmore{
     display: none;
   }
-  .sidebar div{
+
+  .sidebar div span{
     cursor: pointer;
   }
-  .sidebar div:hover{
+  .sidebar div span:hover{
     color: #1c8fd1;
   }
    

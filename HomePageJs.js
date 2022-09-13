@@ -1,3 +1,6 @@
+let itcount =hrcount =mdcount =salescount =seatlecount =indiacount =netcount =
+sharepointcount =recount =bicount =bacount  =productmangercount =operationsmangercount  =softwareengineercount =0;
+
 var img = new Image();
 img.src = "Image1.jfif";
 let employeelistArray = new Array();
@@ -73,17 +76,17 @@ function displayEmployeeList() {
     <div onclick='getDetails(${i})'>
         <div class="row">
             <div class="col-4 ">
-              <img class="profile p-2 " src="Image1.jfif">
+              <img class="profile p-2 " src="./Images/Image1.jfif">
             </div>
         <div class="col p-0">
             <div>${storedEmployeeList[i].firstname} ${storedEmployeeList[i].lastname}</div>
             <div>${storedEmployeeList[i].job}</div>
             <div>${storedEmployeeList[i].department}</div>
-            <i><img class="icon" src="call-grey.png"></i>
-            <i><img class="icon" src="popup.png"></i>
-            <i><img class="icon" src="message.png"></i>
-            <i><img class="icon" src="heart.png"></i>
-            <i><img class="icon" src="star.png"></i>
+            <i><img class="icon" src="./Images/call-grey.png"></i>
+            <i><img class="icon" src="./Images/popup.png"></i>
+            <i><img class="icon" src="./Images/message.png"></i>
+            <i><img class="icon" src="./Images/heart.png"></i>
+            <i><img class="icon" src="./Images/star.png"></i>
         </div>
       </div>
     </div>
@@ -126,7 +129,7 @@ function getDetails(key) {
         <form class="modal-content animate">
           <div class="imgcontainer ">
             <span onclick="closeDetForm()" class="close" title="Close Modal">&times;</span>
-            <img src="Image1.jfif" alt="Avatar" class="avatar">
+            <img src="./Images/Image1.jfif" alt="Avatar" class="avatar">
           </div>
           <div class="container p-5 text-center">
             <p><b>Firstname:-</b>${storedEmployeeList[key].firstname}</p>
@@ -148,6 +151,7 @@ function getDetails(key) {
   document.getElementById("det-form").style.display = "block";
 }
 
+sideBarMenu();
 function openForm() {
   document.getElementById("add-form").style.display = "block";
   document.getElementById("empList").style.display = "none";
@@ -171,7 +175,7 @@ function UpdateEmployeelist(key) {
     <form class="modal-content animate">
       <div class="imgcontainer">
         <span onclick="closeSubmitForm()" class="close" title="Close Modal">&times;</span>
-        <img src="Image1.jfif" alt="Avatar" class="avatar">
+        <img src="./Images/Image1.jfif" alt="Avatar" class="avatar">
       </div>
       <div class="container p-5 ">
         <div class="row">
@@ -384,6 +388,7 @@ function onSubmit(key) {
 }
 
 function getDepartment(departmentvalue) {
+  console.log(departmentvalue);
   var departmentstrore = "";
   for (let i = 0; i < employeelistArray.length; i++) {
     let value = localStorage.getItem("emplistkey");
@@ -424,7 +429,6 @@ function getJob(jobvalue) {
 }
 // function to get count for each catergoies...........................................................................
 function populateEmployeeCount() {
-  let itcount =hrcount =mdcount =salescount =seatlecount =indiacount =netcount =sharepointcount =recount =bicount =bacount  =productmangercount =operationsmangercount  =softwareengineercount =0;
   for (var i = 0; i < employeelistArray.length; i++) {
     let value = localStorage.getItem("emplistkey");
     let parsevalue = JSON.parse(value);
@@ -477,30 +481,119 @@ function populateEmployeeCount() {
       bicount++;
     }
   }
-  document.getElementById("itcount").innerHTML = itcount;
-  document.getElementById("hrcount").innerHTML = hrcount;
-  document.getElementById("mdcount").innerHTML = mdcount;
-  document.getElementById("netcount").innerHTML = netcount;
-  document.getElementById("salescount").innerHTML = salescount;
-  document.getElementById('seatlecount').innerHTML=seatlecount;
-  document.getElementById('bicount').innerHTML=seatlecount;
-  document.getElementById("sharepointcount").innerHTML = sharepointcount;
-  document.getElementById("recount").innerHTML =recount;
-  document.getElementById("bacount").innerHTML =bacount;
-  document.getElementById("pmcount").innerHTML =productmangercount;
-  document.getElementById("omcount").innerHTML =operationsmangercount;
-  document.getElementById("indiacount").innerHTML =indiacount;
-  document.getElementById('secount').innerHTML=softwareengineercount;
-  document.getElementById('bicount').innerHTML=bicount;
+  
 }
 
+function sideBarMenu(){
+  populateEmployeeCount();
+  let tempdepartmentlist='';
+  let tempjoblist='';
+  let tempofficelist='';
+  let departmentlist=new Map([
+    ["IT", itcount],
+    ["HR", hrcount],
+    ["MD", mdcount],
+    ["Sales", salescount]
+  ]);
+  let officelist=new Map([
+    ["India", indiacount],
+    ["Seatle",seatlecount]
+  ])
+  let joblist=new Map([
+    ["SharePoint Practice Head", sharepointcount],
+    [".Net Development Lead", netcount],
+    ["Recruiting Expert", recount],
+    ["BI Developer", bicount],
+    ["Business Analyst", bacount],
+   
+  ])
+  
+  departmentlist.forEach((value, key) =>{
+   
+    let menu=`
 
+    <span id=${key}  onclick="getDepartment(this.id)">${key}(${value})</span><br>
+
+    `;
+    tempdepartmentlist+=menu;
+  });
+  document.getElementById('departmentlist').innerHTML= tempdepartmentlist;
+
+  officelist.forEach((value, key) =>{
+   
+    let menu=`
+
+    <span id=${key}  onclick="getOffice(this.id)">${key}(${value})</span><br>
+
+    `;
+    tempofficelist+=menu;
+  });
+  document.getElementById('officelist').innerHTML= tempofficelist;
+  joblist.forEach((value, key) =>{
+   
+    let menu=`
+
+    <span id=${key}  onclick="getJob(this.id)">${key}(${value})</span><br>
+
+    `;
+    tempjoblist+=menu;
+  });
+  document.getElementById('joblist').innerHTML= tempjoblist;
+
+}
 function viewMore() {
+  operationsmangercount=0;
+  productmangercount=0;
+  softwareengineercount=0;
+  populateEmployeeCount();
+  let tempmorejoblist='';
+  let morejoblist=new Map([
+    ["Operations Manger", operationsmangercount],
+    ["Product Manger", productmangercount],
+    ["Software Engineer", softwareengineercount]
+    
+  ]);
+  morejoblist.forEach((value, key) =>{
+   
+    let menu=`
+
+    <span id=${key}  onclick="getJob(this.id)">${key}(${value})</span><br>
+
+    `;
+    tempmorejoblist+=menu;
+  });
+  let viewless=`
+  <div class="text-info mt-2" id="less" onclick="viewLess()">View Less</div>
+  `;
+  tempmorejoblist+=viewless;
+  document.getElementById('viewmore').innerHTML= tempmorejoblist;
   document.getElementById("viewmore").style.display = "block ";
   document.getElementById("less").style.display = "";
   document.getElementById("more").style.display = "none";
 }
 
+function filterselectDropDown(){
+  let tempoptionlist='';
+  let filterselectDropDownlist = new Map([
+    ['preferredname','Preferred Name'],
+    ['fname',"First Name"],
+    ['job','Job'],
+    ['department','Departments'],
+    ['office','Office'],
+    ['email','Email']
+  ]);
+ 
+  filterselectDropDownlist.forEach((value, key) =>{
+    console.log(key);
+    let optionlist=`
+    <div value="${value}">${key}</div>
+    `;
+    tempoptionlist+=optionlist;
+  });
+  document.getElementById('selct').innerHTML=tempoptionlist;
+
+}
+filterselectDropDown();
 function viewLess() {
   document.getElementById("viewmore").style.display = "none";
   document.getElementById("more").style.display = "block";
@@ -526,11 +619,11 @@ function filters(key) {
             <div>${JSON.parse(value)[key].firstname} ${JSON.parse(value)[key].lastname}</div>
             <div>${JSON.parse(value)[key].job}</div>
             <div>${JSON.parse(value)[key].department}</div>
-            <i><img class="icon" src="call-grey.png"></i>
-            <i><img class="icon" src="popup.png"></i>
-            <i><img class="icon" src="message.png"></i>
-            <i><img class="icon" src="heart.png"></i>
-            <i><img class="icon" src="star.png"></i>
+            <i><img class="icon" src="./Images/call-grey.png"></i>
+            <i><img class="icon" src="./Images/popup.png"></i>
+            <i><img class="icon" src="./Images/message.png"></i>
+            <i><img class="icon" src="./Images/heart.png"></i>
+            <i><img class="icon" src="./Images/star.png"></i>
         </div>
     </div>
     </div>
@@ -544,29 +637,3 @@ function closeAddForm() {
 }
 populateEmployeeCount();
 
-// function filterBy(val, inputStr,bool) {
-//   let arraycollection=['fname','lname','email','job','department','office','phonenumber','skypeid']
-//   let values = localStorage.getItem('emplistkey');
-//   let parsedvalue=JSON.parse(values);
-//   let emplistkey='';
-//   let temp='';
-//   for(let i=0;i<arraycollection.length;i++){
-//     if(val==arraycollection[i]){
-//       emplistkey=arraycollection[i];
-//     }
-//   }
-
-//   for (var i = 0; i < employeelistArray.length; i++) {
-//     if (bool) {
-//       parsedvalue[i].arraycollection[i].toLowerCase().startsWith(inputStr.toLowerCase());
-//       temp = temp + filters(i);
-//     } else {
-//       parsedvalue[i].arraycollection[i].toLowerCase().includes(inputStr.toLowerCase());
-//       temp = temp + filters(i);
-//   }
-//   var alpha = document.getElementById("empList");
-//   alpha.innerHTML = temp;
-//   }
- 
-// }
-// filterBy('fname','fname',true);
