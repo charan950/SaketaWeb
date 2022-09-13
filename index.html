@@ -14,7 +14,7 @@
     <div class=" border-bottom ">
       <div class="row ms-4 me-4">
         <div class="d-flex col p-3 pt-5">
-          <div><img class="brand" src="brand.png"></div>
+          <div><img class="brand" src="./Images/brand.png"></div>
           <div>
             <span class="display-6 pe-5 me-5 text-info">Employee Directory</span><br>
             <div class="fs-5">The Ultimate People Directory Experience</div>
@@ -22,35 +22,25 @@
           <div class="col float-end text-end ms-5 ps-5 align-bottom display-6">
             <span class="text-info ">Welcome,</span>
             <span>Andrew Philips</span>
-            <img class="profile-pic" src="Image1.jfif">
+            <img class="profile-pic" src="./Images/Image1.jfif">
           </div>
         </div>
     </div>   
     </div>
     <div class="row mt-5">
-        <div class="col-2 ms-5 sidebar ">
-          <h6>Departments</h6>
-          <div id="it" onclick="getDepartment(this.id)">IT(<span id="itcount"></span>)</div>
-          <div id="hr"onclick="getDepartment(this.id)" >Human Resources(<span id="hrcount"></span>)</div>
-          <div id="md" onclick="getDepartment(this.id)" >MD(<span id="mdcount"></span>)</div>
-          <div id="sales" onclick="getDepartment(this.id)">Sales(<span id="salescount"></span>)</div>
-          <h6 class="mt-5">Offices</h6>
-          <div id="seatle" onclick="getOffice(this.id)">Seatle(<span id="seatlecount"></span>)</div>
-          <div id="india"onclick="getOffice(this.id)">India(<span id="indiacount"></span>)</div>
-          <h6 class="mt-5">Job Titles</h6>
-          <div id="SharePoint Practice Head" onclick="getJob(this.id)">SharePoint Practice Head(<span id="sharepointcount"></span>)</div>
-          <div id=".Net Development Lead" onclick="getJob(this.id)">.Net Development Lead(<span id="netcount"></span>)</div>
-          <div id="Recruiting Expert"onclick="getJob(this.id)">Recruiting Expert(<span id="recount"></span>)</div>
-          <div id="BI Developer"onclick="getJob(this.id)">BI Developer(<span id="bicount"></span>)</div>
-          <div id="Business Analyst"onclick="getJob(this.id)">Business Analyst(<span id="bacount"></span>)</div>
+        <div class="col-2 ms-5 sidebar" >
+           <h6>Departments</h6>
+           <div  id="departmentlist"></div>
+         
+          <h6 class="mt-5 ">Offices</h6>
+          <div id="officelist"></div>
+          <h6 class="mt-5" >Job Titles</h6>
+          <div id="joblist"></div>
+         
           <span id="viewmore">
-            <div id='Operations Manger' onclick='getJob(this.id)'> Operations Manger(<span id="omcount">${operationsmangercount}</span>)</div>
-            <div id="Product Manger"onclick='getJob(this.id)'>Product Manager(<span id="pmcount">${productmangercount}</span>)</div>
-            <div id='Software Engineer'onclick='getJob(this.id)'>Software Engineer(<span id="secount">${softwareengineercount}</span>)</div>
-    
-            <div class="text-info mt-2" id="less" onclick="viewLess()">View Less</div>
+            
           </span>
-          <div class="text-info mt-2" id="more"onclick=viewMore()  >View More</div>
+          <div class="text-info mt-2" id="more"onclick=viewMore()  >View More</div> 
         </div>
         <div class="col me-5">
             <div class="row">
@@ -71,7 +61,6 @@
                   <button type="button" class="clear-button ms-3 p-2 ps-4 pe-4 " onclick="clearButton()">clear</button>
                   <span class="fs-5 m-3 ms-5 ps-4">Filter By</span>
                   <select id="select" onchange="preferred()" class="border-1">
-                      
                       <option value="preferredname" >Preferred Name</option>
                       <option value="fname"> first Name </option>
                       <option value="job"> job </option>
@@ -107,7 +96,7 @@
         <form class="modal-content animate">
           <div class="imgcontainer">
             <span onclick=closeAddForm() class="close" title="Close Modal">&times;</span>
-            <img src="alpha-pro.jpg" alt="Avatar" class="avatar">
+            <img src="./Images/Image1.jfif" alt="Avatar" class="avatar">
           </div>
           <div class="container p-5 ">
             <div class="row">
