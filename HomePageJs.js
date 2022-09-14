@@ -59,7 +59,7 @@ function addEmployee() {
   }
 
   displayEmployeeList();
-  populateEmployeeCount();
+  
   alert("Employee Details Added");
   document.getElementById("empList").style.display = "";
   document.getElementById("add-form").style.display = "none";
@@ -97,7 +97,7 @@ function displayEmployeeList() {
   }
   var alpha = document.getElementById("empList");
   alpha.innerHTML = listToRender;
-  populateEmployeeCount();
+  sideBarMenu();
 }
 
 window.addEventListener("load", displayEmployeeList);
@@ -116,6 +116,7 @@ for (let i = 65; i < 91; i++) {
 }
 var alpha = document.getElementById("alpha");
 alpha.innerHTML = alphastore;
+
 function clearButton() {
   displayEmployeeList();
   document.getElementById("search").value = "";
@@ -151,7 +152,7 @@ function getDetails(key) {
   document.getElementById("det-form").style.display = "block";
 }
 
-sideBarMenu();
+
 function openForm() {
   document.getElementById("add-form").style.display = "block";
   document.getElementById("empList").style.display = "none";
@@ -191,7 +192,7 @@ function UpdateEmployeelist(key) {
             <label><b>Job</b></label><br>
                   <select id="jobtitle" class="border-1 w-100 text-black" type="text" >
                   <option value=""disabled selected hidden>${storedEmployeeList[key].job}</option>
-                  <option >SharePoint Practice head</option>
+                  <option>SharePoint Practice Head</option>
                     <option>.Net Development Lead  </option>
                     <option> Recruiting Expert </option>
                     <option> BI Developer</option>
@@ -233,7 +234,7 @@ function UpdateEmployeelist(key) {
 
   var empListid = document.getElementById("empList");
   empListid.innerHTML = emplist;
-  populateEmployeeCount();
+  // populateEmployeeCount();
   document.getElementById("updateForm").style.display = "block";
 }
 
@@ -383,7 +384,8 @@ function onSubmit(key) {
     document.getElementById("empList").style.display = "";
     document.getElementById("add-form").style.display = "none";
     displayEmployeeList();
-    populateEmployeeCount();
+    // populateEmployeeCount();
+    
   }
 }
 
@@ -433,43 +435,43 @@ function populateEmployeeCount() {
     let value = localStorage.getItem("emplistkey");
     let parsevalue = JSON.parse(value);
 
-    if (parsevalue[i].department.startsWith("IT Department")) {
+    if (parsevalue[i].department.includes("IT Department")) {
        itcount++;
     }
-    if (parsevalue[i].department.startsWith("HR")) {
+    if (parsevalue[i].department.includes("HR")) {
        hrcount++;
     }
-    if (parsevalue[i].department.startsWith("MD")) {
+    if (parsevalue[i].department.includes("MD")) {
       mdcount++
     }
-    if (parsevalue[i].department.startsWith("Sales")) {
+    if (parsevalue[i].department.includes("Sales")) {
       salescount++;
       
     }
-    if (parsevalue[i].job.startsWith("SharePoint Practice Head")) {
+    if (parsevalue[i].job.includes("SharePoint Practice Head")) {
       sharepointcount++;
     }
 
-    if (parsevalue[i].job.startsWith(".Net Development Lead")) {
+    if (parsevalue[i].job.includes(".Net Development Lead")) {
       netcount++;
     }
-    if (parsevalue[i].job.startsWith("Recruiting Expert")) {
+    if (parsevalue[i].job.includes("Recruiting Expert")) {
       recount++;
     }
-    if (parsevalue[i].office.toLowerCase().startsWith("seatle")) {
+    if (parsevalue[i].office.includes("Seatle")) {
       seatlecount++;
     }
-    if (parsevalue[i].office.startsWith("India")) {
+    if (parsevalue[i].office.includes("India")) {
      indiacount++;
     }
-    if (parsevalue[i].job == "Operations Manger") {
+    if (parsevalue[i].job.includes("Operations Manger")) {
      operationsmangercount++;
     }
-    if (parsevalue[i].job == "Product Manger") {
+    if (parsevalue[i].job.includes("Product Manger")) {
       productmangercount++;
     }
     
-    if (parsevalue[i].job == "Software Engineer") {
+    if (parsevalue[i].job.includes("Software Engineer")) {
       softwareengineercount++;
     }
   
@@ -539,8 +541,13 @@ function sideBarMenu(){
     tempjoblist+=menu;
   });
   document.getElementById('joblist').innerHTML= tempjoblist;
+  itcount =hrcount =mdcount =salescount =seatlecount =indiacount =netcount =
+sharepointcount =recount =bicount =bacount  =productmangercount =operationsmangercount  =softwareengineercount =0;
 
 }
+
+
+// sideBarMenu()
 function viewMore() {
   operationsmangercount=0;
   productmangercount=0;
@@ -635,5 +642,5 @@ function closeAddForm() {
   document.getElementById("add-form").style.display = "none";
   document.getElementById("empList").style.display = "";
 }
-populateEmployeeCount();
+// populateEmployeeCount();
 
