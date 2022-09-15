@@ -98,6 +98,7 @@ function displayEmployeeList() {
   var alpha = document.getElementById("empList");
   alpha.innerHTML = listToRender;
   sideBarMenu();
+  viewMore();
 }
 
 window.addEventListener("load", displayEmployeeList);
@@ -487,6 +488,7 @@ function populateEmployeeCount() {
 }
 
 function sideBarMenu(){
+  
   populateEmployeeCount();
   let tempdepartmentlist='';
   let tempjoblist='';
@@ -546,12 +548,13 @@ sharepointcount =recount =bicount =bacount  =productmangercount =operationsmange
 
 }
 
+viewMore();
 
-// sideBarMenu()
 function viewMore() {
   operationsmangercount=0;
   productmangercount=0;
   softwareengineercount=0;
+  sideBarMenu();
   populateEmployeeCount();
   let tempmorejoblist='';
   let morejoblist=new Map([
