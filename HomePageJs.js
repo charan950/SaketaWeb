@@ -620,7 +620,7 @@ function filters(key) {
     <div onclick='getDetails(${JSON.parse(key)})'>
         <div class="row">
             <div class="col-4 ">
-                <img class="profile p-2 " src="Image1.jfif">
+                <img class="profile p-2 " src="./Images/Image1.jfif">
             </div>
         <div class="col p-0">
             <div>${JSON.parse(value)[key].firstname} ${JSON.parse(value)[key].lastname}</div>
