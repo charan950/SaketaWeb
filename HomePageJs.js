@@ -98,6 +98,7 @@ function displayEmployeeList() {
   var alpha = document.getElementById("empList");
   alpha.innerHTML = listToRender;
   sideBarMenu();
+  viewMore();
 }
 
 window.addEventListener("load", displayEmployeeList);
@@ -388,6 +389,68 @@ function onSubmit(key) {
     
   }
 }
+let select=new Map([
+  ["preferredname", 'preferredname'],
+  ["fname", 'FirstName'],
+  ["job", 'Job'],
+  ["department", 'Departmenst'],
+  ["office", 'office'],
+]);
+// console.log(select[0].key);
+function selectDropdown(){
+  var element = document.getElementById('select');
+  let df=document.createDocumentFragment();
+  select.forEach((value, key) =>{
+    
+    let option=document.createElement('option');
+    option.value=key;
+    let val=document.createTextNode(value);
+    option.appendChild(val);
+    df.appendChild(option);
+  });
+element.appendChild(df);
+}
+selectDropdown();
+let jobDropdownmenu=new Array();
+jobDropdownmenu=['SharePoint Practice Head','.Net Development Lead',' Recruiting Expert ','BI Developer','Business Analyst','Operations Manger',' Software Engineer','Business Analyst','Product Manger'];
+
+function jobDropdow(){
+  let element=document.getElementById('job');
+  let df=document.createDocumentFragment();
+  let disabledoption=document.createElement('option');
+  disabledoption.hidden=true;
+  let txt=document.createTextNode("Select Job Title");
+  disabledoption.appendChild(txt);
+  df.appendChild(disabledoption);
+  jobDropdownmenu.forEach(value=>{
+    let option=document.createElement('option');
+    let txt=document.createTextNode(value);
+    option.appendChild(txt);
+    df.appendChild(option);
+  })
+  element.appendChild(df);
+}
+jobDropdow();
+let departmentdropdownmenu=['IT Department','HR Department','Sales Department','MD Department']
+
+function departmentdropdown(){
+  let element=document.getElementById('selectdep');
+  let df=document.createDocumentFragment();
+  let disabledoption=document.createElement('option');
+  disabledoption.hidden=true;
+  let txt=document.createTextNode("PLEASE SELECT DEPARTMENT");
+  disabledoption.appendChild(txt);
+  df.appendChild(disabledoption);
+  departmentdropdownmenu.forEach(value=>{
+    let option=document.createElement('option');
+    let txt=document.createTextNode(value);
+    option.appendChild(txt);
+    df.appendChild(option);
+  })
+  element.appendChild(df);
+}
+departmentdropdown();
+
 
 function getDepartment(departmentvalue) {
   console.log(departmentvalue);
@@ -487,6 +550,7 @@ function populateEmployeeCount() {
 }
 
 function sideBarMenu(){
+  
   populateEmployeeCount();
   let tempdepartmentlist='';
   let tempjoblist='';
@@ -546,12 +610,13 @@ sharepointcount =recount =bicount =bacount  =productmangercount =operationsmange
 
 }
 
+viewMore();
 
-// sideBarMenu()
 function viewMore() {
   operationsmangercount=0;
   productmangercount=0;
   softwareengineercount=0;
+  sideBarMenu();
   populateEmployeeCount();
   let tempmorejoblist='';
   let morejoblist=new Map([
